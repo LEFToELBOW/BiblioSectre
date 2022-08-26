@@ -8,18 +8,33 @@ public class NormalGhostMovement : MonoBehaviour
     
     [SerializeField] private Vector3[] positionList;
 
-    private int positionIndex;
+    private int positionIndex = 0;
 
-    void MoveToTarget()
+    void MovePath()
     {
         transform.position = Vector2.MoveTowards(transform.position, positionList[positionIndex], Time.deltaTime * moveSpeed);
 
-        if(transform.position == positionList[positionIndex]);
+        if(transform.position == positionList[positionIndex])
+        {
+            if(positionIndex == positionList.Length - 1)
+            {
+                positionIndex = 0;
+            }
+            else
+            {
+                positionIndex++;
+            }
+        }
 
+    }
+
+    void TargetPlayer()
+    {
+        
     }
 
     void Update()
     {
-        MoveToTarget();
+        MovePath();
     }
 }
