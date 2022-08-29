@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1263885101}
   - component: {fileID: 1263885100}
+  - component: {fileID: 1263885103}
+  - component: {fileID: 1263885102}
   m_Layer: 0
   m_Name: PlayerStandin
   m_TagString: Player
@@ -207,6 +209,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1263885102
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263885099}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1263885103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263885099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aefcb1e2f2e1fd41b2bba3ed3c041ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1263885102}
+  speed: 4
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7d78c887-dd97-40d6-8277-ad249beafc58
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &1612707048
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,11 +515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1188144928813569304, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.8025
+      value: -7.77
       objectReference: {fileID: 0}
     - target: {fileID: 1188144928813569304, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.255
+      value: 2.24
       objectReference: {fileID: 0}
     - target: {fileID: 1188144928813569304, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -530,5 +576,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091a92f5404d6224abd01a3dea8754b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  positionList: []
+  moveSpeed: 3
+  positionList:
+  - {x: -7.77, y: 2.24, z: 0}
+  - {x: 7.91, y: 2.24, z: 0}
+  - {x: 7.91, y: -3.84, z: 0}
+  - {x: -7.77, y: -3.84, z: 0}
