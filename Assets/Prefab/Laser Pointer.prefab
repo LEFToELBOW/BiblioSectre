@@ -157,6 +157,7 @@ MonoBehaviour:
   hitForce: 0
   fireEnd: {fileID: 3571936920512041450}
   laserProjectile: {fileID: 4868013549230896328, guid: 93646ecf897929844b86fe1cbed608bc, type: 3}
+  laserRb: {fileID: 7339657857191174480, guid: 93646ecf897929844b86fe1cbed608bc, type: 3}
 --- !u!1 &4977041017452309179
 GameObject:
   m_ObjectHideFlags: 0
