@@ -8,18 +8,13 @@ public class NormalGhostMovement : MonoBehaviour
     [SerializeField] private float ghostSpeed = 2f;
     [SerializeField] private float sightRange = 3f;
     [SerializeField] private Transform player;
-    [SerializeField] private Transform castPointL, castPointR;
+    [SerializeField] private Transform castPointLTop, castPointLBottom,castPointRTop, castPointRBottom;
     [SerializeField] private Vector3[] positionList;
     [SerializeField] private Vector2 endPos;
     [SerializeField] private bool targeting;
     [SerializeField] private float playerDistance;
 
     private int positionIndex = 2;
-    
-    void OnSceneLoad()
-    {
-        
-    }
 
     // ghost moves along path made up of a list of points (can be inputted manually or use empty gameObjects)
     void MovePath()
@@ -46,17 +41,19 @@ public class NormalGhostMovement : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * ghostSpeed);
     }
 
-    // detects if player is within line of sight
-    bool CanSeePlayerL(float distance)
+    // detects if player is within line of sight w/ linecast
+    bool CanSeePlayerL(float distance, Transform castPoint)
     {
         bool seeVal = false;
         float castDist = -distance;
+        Transform castPointFunc = castPoint;
 
-        Vector2 endPos = castPointL.position + Vector3.right * castDist;
+        Vector2 endPos = castPointFunc.position + Vector3.right * castDist;
         
-        //RaycastHit2D sight = Physics2D.CircleCast(castPointL.position, 3f, endPos, 1 << LayerMask.NameToLayer("Action"));
-        RaycastHit2D sight = Physics2D.Linecast(castPointL.position, endPos, 1 << LayerMask.NameToLayer("Action"));
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("Action"));
 
+        //if !=null, then linecast hit an object in the action layer (environment i.e. bookshelves or player)
+        //if tag of detected obj in layer == player, then follow
         if(sight.collider != null)
         {
             if(sight.collider.gameObject.CompareTag("Player"))
@@ -67,21 +64,20 @@ public class NormalGhostMovement : MonoBehaviour
             {
                 seeVal = false;
             }
-            Debug.DrawLine(castPointL.position, endPos, Color.red);       
+            Debug.DrawLine(castPointFunc.position, endPos, Color.red);       
         }
         return seeVal;
     }
-     
 
-    bool CanSeePlayerR(float distance)
+    bool CanSeePlayerR(float distance, Transform castPoint)
     {
         bool seeVal = false;
         float castDist = distance;
+        Transform castPointFunc = castPoint;
 
-        Vector2 endPos = castPointR.position + Vector3.right * castDist;
+        Vector2 endPos = castPointFunc.position + Vector3.right * castDist;
 
-        //RaycastHit2D sight = Physics2D.CircleCast(castPointL.position, 3f, endPos, 1 << LayerMask.NameToLayer("Action"));
-        RaycastHit2D sight = Physics2D.Linecast(castPointR.position, endPos, 1 << LayerMask.NameToLayer("Action"));
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("Action"));
 
         if(sight.collider != null)
         {
@@ -93,7 +89,7 @@ public class NormalGhostMovement : MonoBehaviour
             {
                 seeVal = false;
             }
-            Debug.DrawLine(castPointL.position, endPos, Color.blue);
+            Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
         }
         return seeVal;
     }
@@ -102,7 +98,7 @@ public class NormalGhostMovement : MonoBehaviour
     // otherwise remain on pre-set path
     void DecideToTarget()
     {
-        if(CanSeePlayerL(sightRange) | CanSeePlayerR(sightRange))
+        if(CanSeePlayerL(sightRange, castPointLTop) | CanSeePlayerL(sightRange, castPointLBottom) | CanSeePlayerR(sightRange, castPointRTop) | CanSeePlayerR(sightRange, castPointRBottom))
         {
             Debug.Log("in sight");
             TargetPlayer();
