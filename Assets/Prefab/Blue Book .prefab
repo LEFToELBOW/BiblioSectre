@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3215227530972292817}
   m_Layer: 0
   m_Name: 'Blue Book '
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

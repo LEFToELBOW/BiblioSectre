@@ -8,10 +8,17 @@ public class InputActions : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed = 2f;
     [Space]
-    public PlayerControls input;
+    
+    private PlayerControls input;
     private Vector2 moveDirection = Vector2.zero;
-    public InputAction move;
+    
+    private InputAction move;
 
+    private bool full;
+    private string book;
+    private float redBooks;
+    private float blueBooks;
+    private float greenBooks;
 
     private void Awake()
     {
@@ -37,6 +44,61 @@ public class InputActions : MonoBehaviour
     {
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
     }
+
+    private void onCollisionEnter2d(Collision col)
+    {
+        if(full)
+        {
+            switch (col.gameObject.tag)
+            {
+                case "RedShelf":
+                    if (book == "Red")
+                    {
+                        full = false;
+                        redBooks++;                        
+                    }
+                    break;
+                case "BlueShelf":
+                    if (book == "Blue")
+                    {
+                        full = false;
+                        blueBooks++;
+                    }
+                    break;
+                case "GreenShelf":
+                    if (book == "Green")
+                    {
+                        full = false;
+                        greenBooks++;
+                    }
+                    break;
+            }
+            return;
+        }
+
+        switch (col.gameObject.tag)
+        {
+            case "Red":
+                book = "Red";
+                full = true;
+                Destroy(col.gameObject);
+                break;
+            case "Blue":             
+                book = "Blue";
+                full = true;
+                Destroy(col.gameObject);
+                break;
+            case "Green":
+                book = "Green";
+                full = true;
+                Destroy(col.gameObject);
+                break;
+        }  
+    }
+
+
+
+    
 
 
 }
