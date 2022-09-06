@@ -7,6 +7,9 @@ TagManager:
   - Green
   - Red
   - Blue
+  - RedShelf
+  - GreenShelf
+  - BlueShelf
   layers:
   - Default
   - TransparentFX

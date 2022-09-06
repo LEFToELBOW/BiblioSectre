@@ -7,6 +7,7 @@ public class InputActions : MonoBehaviour
 { 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed = 2f;
+
     [Space]
     
     private PlayerControls input;
@@ -45,8 +46,9 @@ public class InputActions : MonoBehaviour
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
     }
 
-    private void onCollisionEnter2d(Collision col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log("Collide");
         if(full)
         {
             switch (col.gameObject.tag)
@@ -55,7 +57,8 @@ public class InputActions : MonoBehaviour
                     if (book == "Red")
                     {
                         full = false;
-                        redBooks++;                        
+                        redBooks++;   
+                        Debug.Log(redBooks);                     
                     }
                     break;
                 case "BlueShelf":
@@ -63,6 +66,7 @@ public class InputActions : MonoBehaviour
                     {
                         full = false;
                         blueBooks++;
+                        Debug.Log(blueBooks);
                     }
                     break;
                 case "GreenShelf":
@@ -70,6 +74,7 @@ public class InputActions : MonoBehaviour
                     {
                         full = false;
                         greenBooks++;
+                        Debug.Log(greenBooks);
                     }
                     break;
             }

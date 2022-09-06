@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 7327865}
   m_Layer: 6
   m_Name: Book Return Blue
-  m_TagString: Untagged
+  m_TagString: BlueShelf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23526,7 +23526,7 @@ GameObject:
   - component: {fileID: 1701281764}
   m_Layer: 6
   m_Name: Book Return Red
-  m_TagString: Untagged
+  m_TagString: RedShelf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24065,7 +24065,7 @@ GameObject:
   - component: {fileID: 1935538728}
   m_Layer: 6
   m_Name: Book Return Green
-  m_TagString: Untagged
+  m_TagString: GreenShelf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
