@@ -8,8 +8,6 @@ public class InputActions : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed = 2f;
 
-    [Space]
-    
     private PlayerControls input;
     private Vector2 moveDirection = Vector2.zero;
     
@@ -48,7 +46,6 @@ public class InputActions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Collide");
         if(full)
         {
             switch (col.gameObject.tag)
