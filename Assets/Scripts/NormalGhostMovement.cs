@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class NormalGhostMovement : MonoBehaviour
 {
-    [SerializeField] private float ghostSpeed = 2f;
+    [SerializeField] private float normalGhostSpeed = 2f;
+    [SerializeField] private float chasingGhostSpeed = 3f;
     [SerializeField] private float sightRange = 3f;
     [SerializeField] private Transform player;
     [SerializeField] private Transform castPointN, castPointNE, castPointE, castPointSE, castPointS, castPointSW, castPointW, castPointNW;
     [SerializeField] private Vector3[] positionList;
     [SerializeField] private Vector2 endPos;
-    [SerializeField] private bool targeting;
+    [SerializeField] private bool targeting = false;
     [SerializeField] private float playerDistance;
-    [SerializeField] private float TimeChase = 1f;
+    [SerializeField] private float chaseTime = 1f;
 
     private int positionIndex = 2;
 
@@ -21,7 +22,7 @@ public class NormalGhostMovement : MonoBehaviour
     void MovePath()
     {
         
-        transform.position = Vector2.MoveTowards(transform.position, positionList[positionIndex], Time.deltaTime * ghostSpeed);
+        transform.position = Vector2.MoveTowards(transform.position, positionList[positionIndex], Time.deltaTime * normalGhostSpeed);
 
         if(transform.position == positionList[positionIndex])
         {
@@ -39,7 +40,7 @@ public class NormalGhostMovement : MonoBehaviour
 
     void TargetPlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * ghostSpeed);
+        transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * chasingGhostSpeed);
     }
 
     // detects if player is within line of sight w/ linecast
@@ -60,6 +61,7 @@ public class NormalGhostMovement : MonoBehaviour
             if(sight.collider.gameObject.CompareTag("Player"))
             {
                 seeVal = true;
+                targeting = true;
             }
             else
             {
@@ -85,6 +87,7 @@ public class NormalGhostMovement : MonoBehaviour
             if(sight.collider.gameObject.CompareTag("Player"))
             {
                 seeVal = true;
+                targeting = true;
             }
             else
             {
@@ -110,6 +113,7 @@ public class NormalGhostMovement : MonoBehaviour
             if(sight.collider.gameObject.CompareTag("Player"))
             {
                 seeVal = true;
+                targeting = true;
             }
             else
             {
@@ -135,6 +139,7 @@ public class NormalGhostMovement : MonoBehaviour
             if(sight.collider.gameObject.CompareTag("Player"))
             {
                 seeVal = true;
+                targeting = true;
             }
             else
             {
@@ -147,12 +152,31 @@ public class NormalGhostMovement : MonoBehaviour
     
     // if player in line of sight, target player
     // otherwise remain on pre-set path
+
+    /*IEnumerator Wait()
+    {
+        targeting = false;
+        yield return new WaitForSeconds(chaseTime);
+    }*/
+
     void DecideToTarget()
     {
-        if(CanSeePlayerW(sightRange, castPointNW) | CanSeePlayerW(sightRange, castPointSW) | CanSeePlayerE(sightRange, castPointNE) | CanSeePlayerE(sightRange, castPointSE) | CanSeePlayerN(sightRange, castPointE) | CanSeePlayerN(sightRange, castPointN) | CanSeePlayerS(sightRange, castPointS) | CanSeePlayerS(sightRange, castPointW))
+        IEnumerator Wait()
+        {
+            targeting = false;
+            yield return new WaitForSeconds(chaseTime);
+        }
+
+        if((CanSeePlayerW(sightRange, castPointNW) | CanSeePlayerW(sightRange, castPointSW) | CanSeePlayerE(sightRange, castPointNE) | CanSeePlayerE(sightRange, castPointSE) | CanSeePlayerN(sightRange, castPointE) | CanSeePlayerN(sightRange, castPointN) | CanSeePlayerS(sightRange, castPointS) | CanSeePlayerS(sightRange, castPointW)) && targeting)
         {
             Debug.Log("in sight");
             TargetPlayer();
+        }
+        else if(targeting == true)
+        {
+            TargetPlayer();
+            StartCoroutine(Wait());
+            targeting = false;
         }
         else
         {

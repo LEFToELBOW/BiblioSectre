@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GhostNormal
       objectReference: {fileID: 0}
+    - target: {fileID: 6304207849370122369, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
 --- !u!1 &936791683
@@ -318,7 +322,7 @@ GameObject:
   - component: {fileID: 1263885105}
   - component: {fileID: 1263885102}
   - component: {fileID: 1263885104}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: PlayerStandinSprite
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -700,7 +704,7 @@ GameObject:
   - component: {fileID: 2010811191}
   - component: {fileID: 2010811190}
   - component: {fileID: 2010811189}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,6 +1145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser Pointer
       objectReference: {fileID: 0}
+    - target: {fileID: 1762310177483803943, guid: aedf120811625414d80d68a0e7acadde, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3337656904297637479, guid: aedf120811625414d80d68a0e7acadde, type: 3}
       propertyPath: projectileSpeed
       value: 5
@@ -1149,6 +1157,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 1263885102}
+    - target: {fileID: 4977041017452309179, guid: aedf120811625414d80d68a0e7acadde, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3337656904297637479, guid: aedf120811625414d80d68a0e7acadde, type: 3}
     - {fileID: 6169761022245380010, guid: aedf120811625414d80d68a0e7acadde, type: 3}
