@@ -428,15 +428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1263885102}
   speed: 4
-  move:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7d78c887-dd97-40d6-8277-ad249beafc58
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!70 &1263885104
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -466,11 +457,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileRange: 0
-  projectileSpeed: 0
+  projectileSpeed: 5
   hitForce: 0
   fireEnd: {fileID: 2111517837}
   laserProjectile: {fileID: 4868013549230896328, guid: 93646ecf897929844b86fe1cbed608bc, type: 3}
-  laserRb: {fileID: 0}
+  laserRb: {fileID: 7339657857191174480, guid: 93646ecf897929844b86fe1cbed608bc, type: 3}
 --- !u!1 &1481387703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,5 +1149,8 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 1263885102}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3337656904297637479, guid: aedf120811625414d80d68a0e7acadde, type: 3}
+    - {fileID: 6169761022245380010, guid: aedf120811625414d80d68a0e7acadde, type: 3}
+    - {fileID: 4268856176404069193, guid: aedf120811625414d80d68a0e7acadde, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aedf120811625414d80d68a0e7acadde, type: 3}
