@@ -24032,6 +24032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aefcb1e2f2e1fd41b2bba3ed3c041ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laser: {fileID: 4868013549230896328, guid: 93646ecf897929844b86fe1cbed608bc, type: 3}
   rb: {fileID: 1863373052}
   speed: 7
 --- !u!212 &1863373047
@@ -24600,8 +24601,6 @@ GameObject:
   - component: {fileID: 2146180152}
   - component: {fileID: 2146180151}
   - component: {fileID: 2146180150}
-  - component: {fileID: 2146180155}
-  - component: {fileID: 2146180154}
   - component: {fileID: 2146180153}
   m_Layer: 6
   m_Name: Start
@@ -24740,27 +24739,3 @@ MonoBehaviour:
   blueBook: {fileID: 2376979892922878463, guid: b2fdebeee1111f64c9d009d508c443f5, type: 3}
   greenBook: {fileID: 8025594478276917263, guid: b68947c74d87aa945827fea04659259d, type: 3}
   player: {fileID: 1863373044}
---- !u!114 &2146180154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146180148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1c6fde67b59554dbf19f21be3f96c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2146180155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146180148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1c6fde67b59554dbf19f21be3f96c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

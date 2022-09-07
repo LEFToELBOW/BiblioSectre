@@ -5,19 +5,31 @@ using UnityEngine.InputSystem;
 
 public class InputActions : MonoBehaviour
 { 
+    [SerializeField] private GameObject laser;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed = 2f;
 
     private PlayerControls input;
     private Vector2 moveDirection = Vector2.zero;
+    private Rigidbody2D laserBody;
+
+    private Vector2 pos;
     
     private InputAction move;
+    private InputAction fire;
 
+    private float charges = 5;
     private bool full;
     private string book;
     private float redBooks;
     private float blueBooks;
     private float greenBooks;
+
+
+    private void Start()
+    {
+        laserBody = laser.GetComponent<Rigidbody2D>();
+    }
 
     private void Awake()
     {
@@ -27,11 +39,19 @@ public class InputActions : MonoBehaviour
     {   
         move = input.Player.Move;
         move.Enable();
+
+        fire = input.Player.Fire;
+        fire.Enable();
+        fire.performed += Fire;
+
+        fire = input.Player.Fire;
+        fire.Enable();
     }
 
     private void OnDisable()
     {
         move.Disable();
+        fire.Disable();
     }
 
     private void Update()
@@ -42,6 +62,20 @@ public class InputActions : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
+        pos = rb.velocity;
+    }
+
+    private void Fire(InputAction.CallbackContext context)
+    {
+
+        Debug.Log("Initial Shoot");
+        if(charges < 1)
+        { 
+            return;
+        }
+        charges--;
+        Instantiate(laser, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        laserBody.AddForce(pos);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
