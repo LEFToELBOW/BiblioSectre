@@ -8,15 +8,19 @@ public class NormalGhostMovement : MonoBehaviour
     [SerializeField] private float normalGhostSpeed = 2f;
     [SerializeField] private float chasingGhostSpeed = 3f;
     [SerializeField] private float sightRange = 3f;
+    [SerializeField] private float ghostChaseTime = 2f;
     [SerializeField] private Transform player;
-    [SerializeField] private Transform castPointN, castPointNE, castPointE, castPointSE, castPointS, castPointSW, castPointW, castPointNW;
     [SerializeField] private Vector3[] positionList;
-    [SerializeField] private Vector2 endPos;
-    [SerializeField] private bool targeting = false;
-    [SerializeField] private float playerDistance;
-    [SerializeField] private float chaseTime = 1f;
+    [SerializeField] private Transform castPointN, castPointNE, castPointE, castPointSE, castPointS, castPointSW, castPointW, castPointNW;
+    
+    private Vector2 endPos;
+    private int positionIndex = 0;
+    private bool targeting;
 
-    private int positionIndex = 2;
+    void Start()
+    {
+        targeting = false;
+    }
 
     // ghost moves along path made up of a list of points (can be inputted manually or use empty gameObjects)
     void MovePath()
@@ -44,90 +48,10 @@ public class NormalGhostMovement : MonoBehaviour
     }
 
     // detects if player is within line of sight w/ linecast
-    bool CanSeePlayerW(float distance, Transform castPoint)
-    {
-        bool seeVal = false;
-        float castDist = -distance;
-        Transform castPointFunc = castPoint;
-
-        Vector2 endPos = castPointFunc.position + Vector3.right * castDist;
-        
-        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
-
-        //if !=null, then linecast hit an object in the action layer (environment i.e. bookshelves or player)
-        //if tag of detected obj in layer == player, then follow
-        if(sight.collider != null)
-        {
-            if(sight.collider.gameObject.CompareTag("Player"))
-            {
-                seeVal = true;
-                targeting = true;
-            }
-            else
-            {
-                seeVal = false;
-            }
-            Debug.DrawLine(castPointFunc.position, endPos, Color.red);       
-        }
-        return seeVal;
-    }
-
-    bool CanSeePlayerE(float distance, Transform castPoint)
+    bool CanSeePlayerNS(float distance, Transform castPoint)
     {
         bool seeVal = false;
         float castDist = distance;
-        Transform castPointFunc = castPoint;
-
-        Vector2 endPos = castPointFunc.position + Vector3.right * castDist;
-
-        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
-
-        if(sight.collider != null)
-        {
-            if(sight.collider.gameObject.CompareTag("Player"))
-            {
-                seeVal = true;
-                targeting = true;
-            }
-            else
-            {
-                seeVal = false;
-            }
-            Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
-        }
-        return seeVal;
-    }
-
-    bool CanSeePlayerN(float distance, Transform castPoint)
-    {
-        bool seeVal = false;
-        float castDist = distance;
-        Transform castPointFunc = castPoint;
-
-        Vector2 endPos = castPointFunc.position + new Vector3(0,1,0) * castDist;
-
-        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
-
-        if(sight.collider != null)
-        {
-            if(sight.collider.gameObject.CompareTag("Player"))
-            {
-                seeVal = true;
-                targeting = true;
-            }
-            else
-            {
-                seeVal = false;
-            }
-            Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
-        }
-        return seeVal;
-    }
-
-    bool CanSeePlayerS(float distance, Transform castPoint)
-    {
-        bool seeVal = false;
-        float castDist = -distance;
         Transform castPointFunc = castPoint;
 
         Vector2 endPos = castPointFunc.position + new Vector3(0,1,0) * castDist;
@@ -150,33 +74,104 @@ public class NormalGhostMovement : MonoBehaviour
         return seeVal;
     }
     
+    bool CanSeePlayerEW(float distance, Transform castPoint)
+    {
+        bool seeVal = false;
+        float castDist = distance;
+        Transform castPointFunc = castPoint;
+
+        Vector2 endPos = castPointFunc.position + new Vector3(1,0,0) * castDist;
+
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
+
+        if(sight.collider != null)
+        {
+            if(sight.collider.gameObject.CompareTag("Player"))
+            {
+                seeVal = true;
+                targeting = true;
+            }
+            else
+            {
+                seeVal = false;
+            }
+            Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
+        }
+        return seeVal;
+    }
+
+    bool CanSeePlayerNESW(float distance, Transform castPoint)
+    {
+        bool seeVal = false;
+        float castDist = distance;
+        Transform castPointFunc = castPoint;
+
+        Vector2 endPos = castPointFunc.position + new Vector3(1,1,0) * castDist;
+
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
+
+        if(sight.collider != null)
+        {
+            if(sight.collider.gameObject.CompareTag("Player"))
+            {
+                seeVal = true;
+                targeting = true;
+            }
+            else
+            {
+                seeVal = false;
+            }
+            Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
+        }
+        return seeVal;
+    }
+
+    bool CanSeePlayerSENW(float distance, Transform castPoint)
+    {
+        bool seeVal = false;
+        float castDist = distance;
+        Transform castPointFunc = castPoint;
+
+        Vector2 endPos = castPointFunc.position + new Vector3(-1,1,0) * castDist;
+
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
+
+        if(sight.collider != null)
+        {
+            if(sight.collider.gameObject.CompareTag("Player"))
+            {
+                seeVal = true;
+                targeting = true;
+            }
+            else
+            {
+                seeVal = false;
+            }
+            Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
+        }
+        return seeVal;
+    }
+    
+    // coroutine makes the ghost continue following the player for a certain amt of time after leaving line of sight before going back to path
+    IEnumerator Wait(float chaseTime)
+    {
+        TargetPlayer();
+        yield return new WaitForSeconds(chaseTime);
+        targeting = false;
+    }
+
     // if player in line of sight, target player
     // otherwise remain on pre-set path
-
-    /*IEnumerator Wait()
-    {
-        targeting = false;
-        yield return new WaitForSeconds(chaseTime);
-    }*/
-
     void DecideToTarget()
     {
-        IEnumerator Wait()
+        if((CanSeePlayerNS(sightRange, castPointN) | CanSeePlayerNS(-sightRange, castPointS) | CanSeePlayerEW(sightRange, castPointE) | CanSeePlayerEW(-sightRange, castPointW) | CanSeePlayerNESW(sightRange, castPointNE) | CanSeePlayerNESW(-sightRange, castPointSW) | CanSeePlayerSENW(sightRange, castPointNW) | CanSeePlayerSENW(-sightRange, castPointSE)) && targeting)
         {
-            targeting = false;
-            yield return new WaitForSeconds(chaseTime);
-        }
-
-        if((CanSeePlayerW(sightRange, castPointNW) | CanSeePlayerW(sightRange, castPointSW) | CanSeePlayerE(sightRange, castPointNE) | CanSeePlayerE(sightRange, castPointSE) | CanSeePlayerN(sightRange, castPointE) | CanSeePlayerN(sightRange, castPointN) | CanSeePlayerS(sightRange, castPointS) | CanSeePlayerS(sightRange, castPointW)) && targeting)
-        {
-            Debug.Log("in sight");
             TargetPlayer();
         }
+        // invokes chasing coroutine if no longer in LOS but targeting bool is still true
         else if(targeting == true)
         {
-            TargetPlayer();
-            StartCoroutine(Wait());
-            targeting = false;
+            StartCoroutine(Wait(ghostChaseTime));   
         }
         else
         {
