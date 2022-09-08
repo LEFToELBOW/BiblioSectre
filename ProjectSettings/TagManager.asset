@@ -10,6 +10,7 @@ TagManager:
   - RedShelf
   - GreenShelf
   - BlueShelf
+  - Laser
   layers:
   - Default
   - TransparentFX

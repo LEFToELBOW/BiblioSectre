@@ -11,13 +11,15 @@ public class InputActions : MonoBehaviour
 
     private PlayerControls input;
     private Vector2 moveDirection = Vector2.zero;
-    private Rigidbody2D laserBody;
+
 
     private Vector2 pos;
     
     private InputAction move;
     private InputAction fire;
 
+    private bool obtShoot;
+    private bool canShoot;
     private float charges = 5;
     private bool full;
     private string book;
@@ -25,11 +27,6 @@ public class InputActions : MonoBehaviour
     private float blueBooks;
     private float greenBooks;
 
-
-    private void Start()
-    {
-        laserBody = laser.GetComponent<Rigidbody2D>();
-    }
 
     private void Awake()
     {
@@ -57,25 +54,42 @@ public class InputActions : MonoBehaviour
     private void Update()
     {
         moveDirection = move.ReadValue<Vector2>();
+        if(!(moveDirection.x == 0 && moveDirection.y == 0))
+        {
+            if(obtShoot)
+            {
+                canShoot = true;
+            }
+            pos = moveDirection;
+            Debug.Log(pos);
+        }
+        else
+        {
+            if(obtShoot)
+            {
+                canShoot = false;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
-        pos = rb.velocity;
     }
 
     private void Fire(InputAction.CallbackContext context)
-    {
-
-        Debug.Log("Initial Shoot");
-        if(charges < 1)
+    {    
+        if((charges < 1) || !obtShoot || !canShoot)
         { 
             return;
         }
-        charges--;
-        Instantiate(laser, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        laserBody.AddForce(pos);
+        
+        //charges--;
+
+        GameObject laserIns = Instantiate(laser, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        Rigidbody2D laserRb = laserIns.GetComponent<Rigidbody2D>();
+
+        laserRb.AddForce(pos * 500);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -128,6 +142,10 @@ public class InputActions : MonoBehaviour
                 book = "Green";
                 full = true;
                 Destroy(col.gameObject);
+                break;
+            case "Laser":
+                obtShoot = true;
+                canShoot = true;
                 break;
         }  
     }
