@@ -20,7 +20,7 @@ public class InputActions : MonoBehaviour
 
     private bool obtShoot;
     private bool canShoot;
-    private float charges = 5;
+    private float charges = 15;
     private bool full;
     private string book;
     private float redBooks;
@@ -84,10 +84,12 @@ public class InputActions : MonoBehaviour
             return;
         }
         
-        //charges--;
+        charges--;
 
         GameObject laserIns = Instantiate(laser, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         Rigidbody2D laserRb = laserIns.GetComponent<Rigidbody2D>();
+        CircleCollider2D collider = laserIns.GetComponent<CircleCollider2D>();
+        laserIns.gameObject.layer = LayerMask.NameToLayer("Laser");
 
         laserRb.AddForce(pos * 500);
     }
@@ -146,6 +148,7 @@ public class InputActions : MonoBehaviour
             case "Laser":
                 obtShoot = true;
                 canShoot = true;
+                Destroy(col.gameObject);
                 break;
         }  
     }

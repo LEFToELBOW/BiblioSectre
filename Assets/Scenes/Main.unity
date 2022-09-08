@@ -21548,7 +21548,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21623,7 +21623,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -21821,7 +21821,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -22038,6 +22038,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 491483026281440326, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1188144928813569304, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -22082,6 +22086,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1637074944504890824, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013134443449543948, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2631844848784992428, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350518382361577640, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5439580033995648762, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828331545613974466, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: player
       value: 
@@ -22117,6 +22145,14 @@ PrefabInstance:
     - target: {fileID: 6304207849370122369, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: m_Name
       value: GhostNormal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304207849370122369, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229178858325751719, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
@@ -22896,7 +22932,7 @@ GameObject:
   - component: {fileID: 1351784437}
   - component: {fileID: 1351784436}
   - component: {fileID: 1351784435}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: FieldOfView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22985,7 +23021,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 4
+  m_PointLightInnerRadius: 3
   m_PointLightOuterRadius: 10
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -23712,6 +23748,49 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!1 &1645199601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6304207849370122369, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+  m_PrefabInstance: {fileID: 834251489}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1645199605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645199601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1779229f7feced4eaf9e3773e987048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1645199606
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645199601}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.21273983, y: 0.19717216}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0944972, y: 1.18246}
+  m_EdgeRadius: 0
 --- !u!1 &1701281763
 GameObject:
   m_ObjectHideFlags: 0
@@ -24124,7 +24203,7 @@ GameObject:
   - component: {fileID: 1863373046}
   - component: {fileID: 1863373051}
   - component: {fileID: 1863373052}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}

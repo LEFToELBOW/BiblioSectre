@@ -6,13 +6,12 @@ public class LevelSet : MonoBehaviour
 {
     [SerializeField] private GameObject redBook, blueBook, greenBook;
     [SerializeField] private GameObject player;
-    private float level = 1f;
+    public static float level = 1f;
     private GameObject[] books;
     
 
     private void Start()
     {
-
         books = new GameObject[3];
         books[0] = redBook;
         books[1] = blueBook;
