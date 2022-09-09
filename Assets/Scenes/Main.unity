@@ -21252,6 +21252,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerDeathCount: 0
+--- !u!4 &318549773 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1188144928813569304, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
+  m_PrefabInstance: {fileID: 2033097929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &320792939
 GameObject:
   m_ObjectHideFlags: 0
@@ -24732,6 +24737,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 318549773}
     - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
       propertyPath: player
       value: 

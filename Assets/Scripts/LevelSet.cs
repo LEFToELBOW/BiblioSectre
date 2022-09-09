@@ -20,10 +20,14 @@ public class LevelSet : MonoBehaviour
         
     private void OnCollisionEnter2D(Collision2D col)
     {
+        if(col.gameObject.tag != "Player")
+        {
+            return;
+        }
         switch(level)
         {
             case 1:
-                Debug.Log(books.Length);
+                Debug.Log("Setting Level");
 
                 player.transform.position = new Vector2(0,-2);
 
@@ -42,8 +46,6 @@ public class LevelSet : MonoBehaviour
                 Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-12, -8), Random.Range(25, 30)), Quaternion.identity);
                 Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(8, 12), Random.Range(25, 30)), Quaternion.identity);
 
-                
-                //Debug.Log("Something is happenning");
                 level++;
                 break;
             case 2:
