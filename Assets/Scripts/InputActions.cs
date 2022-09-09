@@ -85,8 +85,9 @@ public class InputActions : MonoBehaviour
         }
         
         charges--;
-
         GameObject laserIns = Instantiate(laser, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        LaserColKill laserEnd = laserIns.GetComponent<LaserColKill>();
+        
         Rigidbody2D laserRb = laserIns.GetComponent<Rigidbody2D>();
         CircleCollider2D collider = laserIns.GetComponent<CircleCollider2D>();
         laserIns.gameObject.layer = LayerMask.NameToLayer("Laser");

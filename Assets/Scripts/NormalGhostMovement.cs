@@ -211,8 +211,10 @@ public class NormalGhostMovement : MonoBehaviour
 
         Rigidbody2D ghostProjRb = ghostProjIns.GetComponent<Rigidbody2D>();
         CircleCollider2D collider = ghostProjIns.GetComponent<CircleCollider2D>();
+        Kill kill = ghostProjIns.GetComponent<Kill>();
         ghostProjIns.gameObject.layer = LayerMask.NameToLayer("Ghost");
         ghostProjRb.AddForce(new Vector2(player.position.x, player.position.y) * 50);
+        
     }
 
     // causes the growing ghost to change size via lerp when player in LOS
