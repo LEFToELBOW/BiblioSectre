@@ -61,7 +61,7 @@ public class InputActions : MonoBehaviour
                 canShoot = true;
             }
             pos = moveDirection;
-            Debug.Log(pos);
+            //Debug.Log(pos);
         }
         else
         {

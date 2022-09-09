@@ -5,25 +5,31 @@ using UnityEngine;
 
 public class NormalGhostMovement : MonoBehaviour
 {
-    [SerializeField] private float normalGhostSpeed = 2f;
-    [SerializeField] private float chasingGhostSpeed = 3f;
-    [SerializeField] private float sightRange = 3f;
-    [SerializeField] private float ghostChaseTime = 2f;
-    [SerializeField] private Transform player;
+    [SerializeField] private float normalGhostSpeed, chasingGhostSpeed, sightRange, ghostChaseTime;
+    [SerializeField] private Transform player, ghost;
+    [SerializeField] private string ghostType;
+    [SerializeField] private GameObject ghostProjectile;
+    [SerializeField] private Rigidbody2D ghostProjRb;
+    [SerializeField] private Vector3 originalScale, changedScale;
     [SerializeField] private Vector3[] positionList;
     [SerializeField] private Transform castPointN, castPointNE, castPointE, castPointSE, castPointS, castPointSW, castPointW, castPointNW;
     
+    
     private Vector2 endPos;
     private int positionIndex = 0;
-    private bool targeting;
+    private bool targeting, projectileInstantiation, growing, big;
 
     void Start()
     {
         targeting = false;
+        projectileInstantiation = false;
+        big = false;
+        growing = false;
+        Time.timeScale = 1.0f;
     }
 
     // ghost moves along path made up of a list of points (can be inputted manually or use empty gameObjects)
-    void MovePath()
+    private void MovePath()
     {
         
         transform.position = Vector2.MoveTowards(transform.position, positionList[positionIndex], Time.deltaTime * normalGhostSpeed);
@@ -42,13 +48,21 @@ public class NormalGhostMovement : MonoBehaviour
 
     }
 
-    void TargetPlayer()
+    // chases player
+    private void TargetPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * chasingGhostSpeed);
     }
 
+    /*private void FireProjectile()
+    {
+        
+        StartCoroutine(GhostFireDelay());
+
+    }*/
+
     // detects if player is within line of sight w/ linecast
-    bool CanSeePlayerNS(float distance, Transform castPoint)
+    private bool CanSeePlayerNS(float distance, Transform castPoint)
     {
         bool seeVal = false;
         float castDist = distance;
@@ -74,7 +88,7 @@ public class NormalGhostMovement : MonoBehaviour
         return seeVal;
     }
     
-    bool CanSeePlayerEW(float distance, Transform castPoint)
+    private bool CanSeePlayerEW(float distance, Transform castPoint)
     {
         bool seeVal = false;
         float castDist = distance;
@@ -100,7 +114,7 @@ public class NormalGhostMovement : MonoBehaviour
         return seeVal;
     }
 
-    bool CanSeePlayerNESW(float distance, Transform castPoint)
+    private bool CanSeePlayerNESW(float distance, Transform castPoint)
     {
         bool seeVal = false;
         float castDist = distance;
@@ -126,7 +140,7 @@ public class NormalGhostMovement : MonoBehaviour
         return seeVal;
     }
 
-    bool CanSeePlayerSENW(float distance, Transform castPoint)
+    private bool CanSeePlayerSENW(float distance, Transform castPoint)
     {
         bool seeVal = false;
         float castDist = distance;
@@ -134,7 +148,7 @@ public class NormalGhostMovement : MonoBehaviour
 
         Vector2 endPos = castPointFunc.position + new Vector3(-1,1,0) * castDist;
 
-        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("Action"));
 
         if(sight.collider != null)
         {
@@ -153,25 +167,104 @@ public class NormalGhostMovement : MonoBehaviour
     }
     
     // coroutine makes the ghost continue following the player for a certain amt of time after leaving line of sight before going back to path
-    IEnumerator Wait(float chaseTime)
+    IEnumerator PersistentAttack(float chaseTime)
     {
-        TargetPlayer();
+        if(ghostType == "normal")
+        {
+            TargetPlayer();
+        }
+        else if(ghostType == "projectile")
+        {
+            //FireProjectile();
+            MovePath();
+        }
+        else if(ghostType == "grow")
+        {
+            TargetPlayer();
+            growing = false;
+        }
+        else
+        {
+            MovePath();
+        }
         yield return new WaitForSeconds(chaseTime);
         targeting = false;
     }
 
+    // instantiates projectile and fires it if player in LOS
+    IEnumerator GhostFireDelay()
+    {
+        GameObject ghostProjIns = Instantiate(ghostProjectile, new Vector2(ghost.transform.position.x, ghost.transform.position.y), Quaternion.identity);
+        Rigidbody2D ghostProjRb = ghostProjIns.GetComponent<Rigidbody2D>();
+        CircleCollider2D collider = ghostProjIns.GetComponent<CircleCollider2D>();
+        ghostProjIns.gameObject.layer = LayerMask.NameToLayer("Ghost");
+        ghostProjRb.AddForce(new Vector2(player.transform.position.x, player.transform.position.y) * 500);
+        yield return new WaitForSeconds(3f);
+        projectileInstantiation = true;
+        
+    }
+
+    // causes the growing ghost to change size via lerp when player in LOS
+    IEnumerator SizeChange()
+    {
+        if(growing == true && big == false)
+        {
+            for(float t = 0; t < 1; t += Time.deltaTime / 3f)
+            {
+                ghost.transform.localScale = Vector3.Lerp(originalScale, changedScale, t);
+                yield return null;
+            }
+            big = true;
+        }
+        else if(growing == false && big == true)
+        {
+            for(float t = 0; t < 1; t += Time.deltaTime / 3f)
+                {
+                    ghost.transform.localScale = Vector3.Lerp(changedScale, originalScale, t);
+                    yield return null;
+                }
+            big = false;
+        }
+        else
+        {
+
+        }
+        
+    }
     // if player in line of sight, target player
     // otherwise remain on pre-set path
-    void DecideToTarget()
+    private void DecideToTarget()
     {
-        if((CanSeePlayerNS(sightRange, castPointN) | CanSeePlayerNS(-sightRange, castPointS) | CanSeePlayerEW(sightRange, castPointE) | CanSeePlayerEW(-sightRange, castPointW) | CanSeePlayerNESW(sightRange, castPointNE) | CanSeePlayerNESW(-sightRange, castPointSW) | CanSeePlayerSENW(sightRange, castPointNW) | CanSeePlayerSENW(-sightRange, castPointSE)) && targeting)
+        if((CanSeePlayerNS(sightRange, castPointN) | 
+            CanSeePlayerNS(-sightRange, castPointS) | 
+            CanSeePlayerEW(sightRange, castPointE) | 
+            CanSeePlayerEW(-sightRange, castPointW) | 
+            CanSeePlayerNESW(sightRange, castPointNE) | 
+            CanSeePlayerNESW(-sightRange, castPointSW) | 
+            CanSeePlayerSENW(sightRange, castPointNW) | 
+            CanSeePlayerSENW(-sightRange, castPointSE)) 
+            && targeting)
         {
-            TargetPlayer();
+            if(ghostType == "normal")
+            {
+                TargetPlayer();
+            }
+            else if(ghostType == "projectile")
+            {
+                MovePath();
+                StartCoroutine(GhostFireDelay());
+            }
+            else if(ghostType == "grow")
+            {
+                TargetPlayer();
+                growing = true;
+                StartCoroutine(SizeChange());
+            }
         }
         // invokes chasing coroutine if no longer in LOS but targeting bool is still true
         else if(targeting == true)
         {
-            StartCoroutine(Wait(ghostChaseTime));   
+            StartCoroutine(PersistentAttack(ghostChaseTime));   
         }
         else
         {
@@ -179,7 +272,7 @@ public class NormalGhostMovement : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         DecideToTarget();
     }

@@ -43,7 +43,7 @@ public class LevelSet : MonoBehaviour
                 Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(8, 12), Random.Range(25, 30)), Quaternion.identity);
 
                 
-                Debug.Log("Something is happenning");
+                //Debug.Log("Something is happenning");
                 level++;
                 break;
             case 2:
