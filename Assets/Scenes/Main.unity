@@ -689,6 +689,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1863373048}
     - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
+      propertyPath: ghostGO
+      value: 
+      objectReference: {fileID: 1219198632}
+    - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
+      propertyPath: ghostPos
+      value: 
+      objectReference: {fileID: 1219198640}
+    - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
       propertyPath: sightRange
       value: 4
       objectReference: {fileID: 0}
@@ -22226,6 +22234,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1863373048}
     - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: ghostGO
+      value: 
+      objectReference: {fileID: 1645199601}
+    - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: ghostChaseTime
       value: 2
       objectReference: {fileID: 0}
@@ -22799,6 +22811,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerDeathCount: 0
+--- !u!4 &1219198640 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1188144928813569304, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
+  m_PrefabInstance: {fileID: 292051413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1245646442
 GameObject:
   m_ObjectHideFlags: 0
@@ -24720,9 +24737,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1863373048}
     - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
+      propertyPath: ghostGO
+      value: 
+      objectReference: {fileID: 318549765}
+    - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
       propertyPath: sightRange
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
+      propertyPath: ghostProjRb
+      value: 
+      objectReference: {fileID: 7339657857191174480, guid: 7596dab8b676e9144801caba3de53358, type: 3}
+    - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
+      propertyPath: ghostProjectile
+      value: 
+      objectReference: {fileID: 4868013549230896328, guid: 7596dab8b676e9144801caba3de53358, type: 3}
     - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
       propertyPath: positionList.Array.size
       value: 2

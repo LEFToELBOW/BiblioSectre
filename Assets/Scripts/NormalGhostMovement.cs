@@ -6,9 +6,9 @@ using UnityEngine;
 public class NormalGhostMovement : MonoBehaviour
 {
     [SerializeField] private float normalGhostSpeed, chasingGhostSpeed, sightRange, ghostChaseTime;
-    [SerializeField] private Transform player, ghost;
+    [SerializeField] private Transform player, ghostPos;
     [SerializeField] private string ghostType;
-    [SerializeField] private GameObject ghostProjectile;
+    [SerializeField] private GameObject ghostProjectile, ghostGO;
     [SerializeField] private Rigidbody2D ghostProjRb;
     [SerializeField] private Vector3 originalScale, changedScale;
     [SerializeField] private Vector3[] positionList;
@@ -17,15 +17,15 @@ public class NormalGhostMovement : MonoBehaviour
     
     private Vector2 endPos;
     private int positionIndex = 0;
-    private bool targeting, projectileInstantiation, growing, big;
+    private bool targeting, growing, big;
 
     void Start()
     {
         targeting = false;
-        projectileInstantiation = false;
         big = false;
         growing = false;
         Time.timeScale = 1.0f;
+        ghostGO.SetActive(true);
     }
 
     // ghost moves along path made up of a list of points (can be inputted manually or use empty gameObjects)
@@ -194,13 +194,12 @@ public class NormalGhostMovement : MonoBehaviour
     // instantiates projectile and fires it if player in LOS
     IEnumerator GhostFireDelay()
     {
-        GameObject ghostProjIns = Instantiate(ghostProjectile, new Vector2(ghost.transform.position.x, ghost.transform.position.y), Quaternion.identity);
+        GameObject ghostProjIns = Instantiate(ghostProjectile, new Vector2(ghostPos.transform.position.x, ghostPos.transform.position.y), Quaternion.identity);
         Rigidbody2D ghostProjRb = ghostProjIns.GetComponent<Rigidbody2D>();
         CircleCollider2D collider = ghostProjIns.GetComponent<CircleCollider2D>();
         ghostProjIns.gameObject.layer = LayerMask.NameToLayer("Ghost");
         ghostProjRb.AddForce(new Vector2(player.transform.position.x, player.transform.position.y) * 500);
         yield return new WaitForSeconds(3f);
-        projectileInstantiation = true;
         
     }
 
@@ -211,7 +210,7 @@ public class NormalGhostMovement : MonoBehaviour
         {
             for(float t = 0; t < 1; t += Time.deltaTime / 3f)
             {
-                ghost.transform.localScale = Vector3.Lerp(originalScale, changedScale, t);
+                ghostPos.transform.localScale = Vector3.Lerp(originalScale, changedScale, t);
                 yield return null;
             }
             big = true;
@@ -220,7 +219,7 @@ public class NormalGhostMovement : MonoBehaviour
         {
             for(float t = 0; t < 1; t += Time.deltaTime / 3f)
                 {
-                    ghost.transform.localScale = Vector3.Lerp(changedScale, originalScale, t);
+                    ghostPos.transform.localScale = Vector3.Lerp(changedScale, originalScale, t);
                     yield return null;
                 }
             big = false;
@@ -272,6 +271,13 @@ public class NormalGhostMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Laser")
+        {
+            ghostGO.SetActive(false);
+        }
+    }
     private void Update()
     {
         DecideToTarget();

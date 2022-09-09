@@ -327,9 +327,10 @@ MonoBehaviour:
   sightRange: 3
   ghostChaseTime: 0
   player: {fileID: 0}
-  ghost: {fileID: 0}
+  ghostPos: {fileID: 1188144928813569304}
   ghostType: normal
   ghostProjectile: {fileID: 0}
+  ghostGO: {fileID: 6304207849370122369}
   ghostProjRb: {fileID: 0}
   originalScale: {x: 0, y: 0, z: 0}
   changedScale: {x: 0, y: 0, z: 0}
