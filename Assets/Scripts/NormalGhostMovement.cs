@@ -15,7 +15,7 @@ public class NormalGhostMovement : MonoBehaviour
     [SerializeField] private Transform castPointN, castPointNE, castPointE, castPointSE, castPointS, castPointSW, castPointW, castPointNW;
 
     private float time = 0;
-    private float interpolationPeriod = 1f;
+    private float interpolationPeriod = .5f;
 
 
 
@@ -213,7 +213,11 @@ public class NormalGhostMovement : MonoBehaviour
         CircleCollider2D collider = ghostProjIns.GetComponent<CircleCollider2D>();
         Kill kill = ghostProjIns.GetComponent<Kill>();
         ghostProjIns.gameObject.layer = LayerMask.NameToLayer("Ghost");
-        ghostProjRb.AddForce(new Vector2(player.position.x, player.position.y) * 50);
+        Vector2 randomVector = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        //.Normalize();
+        ghostProjIns.gameObject.layer = LayerMask.NameToLayer("wall");   
+        ghostProjRb.AddForce(randomVector * 800);
+    
         
     }
 

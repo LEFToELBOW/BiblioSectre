@@ -24755,7 +24755,7 @@ PrefabInstance:
       objectReference: {fileID: 318549765}
     - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
       propertyPath: sightRange
-      value: 4
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5895801834060462461, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
       propertyPath: ghostProjRb
