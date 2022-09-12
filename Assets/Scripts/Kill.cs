@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Kill : MonoBehaviour
 {
-    public int PlayerDeathCount;
-    private float time;
-    private float grace = 3f;
-    private bool invincible;
+    public static int PlayerDeathCount;
+    [SerializeField] private float grace = 3f;
+    private static bool invincible;
     void Start()
     {
         PlayerDeathCount = 0;
@@ -16,22 +15,28 @@ public class Kill : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            if(invincible)
+            if(!invincible)
+            {
+                invincible = true;
+                Debug.Log("unkillable");
+                col.transform.position = new Vector2(0,-2);
+                PlayerDeathCount = PlayerDeathCount + 1;
+                Debug.Log(PlayerDeathCount.ToString() + " deaths");
+            }
+            else
             {
                 Destroy(this.gameObject);
-                return;
             }
-            col.transform.position = new Vector2(0,-2);
-            //Debug.Log(LevelSet.level);
-            PlayerDeathCount = PlayerDeathCount + 1;
-            Debug.Log(PlayerDeathCount.ToString() + " deaths");
-            invincible = true;
-            time += Time.deltaTime;
-            if (time >= grace)
-            {
-                time = 0f;
-                invincible = false;
-            }
+            
+            StartCoroutine(waitToDestroy());
+
         }
     }
+    private IEnumerator waitToDestroy()
+    {
+        yield return new WaitForSeconds(grace);
+        invincible = false;
+        Debug.Log("no longer unkillable");
+    }
 }
+
