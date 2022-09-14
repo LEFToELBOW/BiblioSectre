@@ -5,38 +5,33 @@ using UnityEngine;
 public class Kill : MonoBehaviour
 {
     public static int PlayerDeathCount;
-    [SerializeField] private float grace = 3f;
-    private static bool invincible;
-    void Start()
-    {
-        PlayerDeathCount = 0;
-    }
+    [SerializeField] private float grace = 1f;
+    private static bool invincible = false;
     private void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "Player")
         {
-            if(!invincible)
+            if(invincible == false)
             {
                 invincible = true;
-                Debug.Log("unkillable");
+                Debug.Log(invincible);
                 col.transform.position = new Vector2(0,-2);
-                PlayerDeathCount = PlayerDeathCount + 1;
+                PlayerDeathCount++;
                 Debug.Log(PlayerDeathCount.ToString() + " deaths");
+                StartCoroutine(waitToStop());
             }
             else
             {
-                Destroy(this.gameObject);
-            }
+                Destroy(this.gameObject); 
+            }             
             
-            StartCoroutine(waitToDestroy());
-
         }
     }
-    private IEnumerator waitToDestroy()
+    private IEnumerator waitToStop()
     {
-        yield return new WaitForSeconds(grace);
+        yield return new WaitForSeconds(1);
         invincible = false;
-        Debug.Log("no longer unkillable");
+        Debug.Log(invincible);
     }
 }
 

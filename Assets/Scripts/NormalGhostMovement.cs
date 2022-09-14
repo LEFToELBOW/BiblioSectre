@@ -18,7 +18,7 @@ public class NormalGhostMovement : MonoBehaviour
     private float interpolationPeriod = .5f;
 
 
-
+    private bool isTargeting;
     private Vector2 endPos;
     private int positionIndex = 0;
     private bool targeting, projectileInstantiation, growing, big;
@@ -195,16 +195,6 @@ public class NormalGhostMovement : MonoBehaviour
         targeting = false;
     }
 
-    // instantiates projectile and fires it if player in LOS
-    //IEnumerator GhostFireDelay()
-    //{
-    //    Fire();
-
-    //    yield return new WaitForSeconds(3f);
-    //    projectileInstantiation = true;
-
-    //}
-
     private void Fire()
     {
         GameObject ghostProjIns = Instantiate(ghostProjectile, new Vector2(ghost.transform.position.x, ghost.transform.position.y), Quaternion.identity);
@@ -212,11 +202,13 @@ public class NormalGhostMovement : MonoBehaviour
         Rigidbody2D ghostProjRb = ghostProjIns.GetComponent<Rigidbody2D>();
         CircleCollider2D collider = ghostProjIns.GetComponent<CircleCollider2D>();
         Kill kill = ghostProjIns.GetComponent<Kill>();
+        LaserColKill projEnd = ghostProjIns.GetComponent<LaserColKill>();
         ghostProjIns.gameObject.layer = LayerMask.NameToLayer("Ghost");
         Vector2 randomVector = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         //.Normalize();
         ghostProjIns.gameObject.layer = LayerMask.NameToLayer("wall");   
         ghostProjRb.AddForce(randomVector * 800);
+
     
         
     }
@@ -262,20 +254,13 @@ public class NormalGhostMovement : MonoBehaviour
             CanSeePlayerSENW(-sightRange, castPointSE))
             && targeting)
         {
+            isTargeting = true;
             if (ghostType == "normal")
             {
                 TargetPlayer();
             }
             else if (ghostType == "projectile")
             {
-                //MovePath();
-                //StartCoroutine(GhostFireDelay());
-                time += Time.deltaTime;
-                if (time >= interpolationPeriod)
-                {
-                    time = time - interpolationPeriod;
-                    Fire();
-                }
 
             }
             else if (ghostType == "grow")
@@ -285,6 +270,7 @@ public class NormalGhostMovement : MonoBehaviour
                 StartCoroutine(SizeChange());
             }
         }
+        
         // invokes chasing coroutine if no longer in LOS but targeting bool is still true
         else if (targeting == true)
         {
@@ -293,6 +279,7 @@ public class NormalGhostMovement : MonoBehaviour
         else
         {
             MovePath();
+            isTargeting = false;
         }
     }
 
@@ -300,5 +287,14 @@ public class NormalGhostMovement : MonoBehaviour
     {
 
         DecideToTarget();
+        if(isTargeting)
+        {
+            time += Time.deltaTime;
+            if(time > interpolationPeriod)
+            {
+                Fire();
+                time = 0f;
+            }
+        }
     }
 }
