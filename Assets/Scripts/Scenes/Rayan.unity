@@ -262,6 +262,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!4 &758583397 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1188144928813569304, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+  m_PrefabInstance: {fileID: 114229773950178540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &865804667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -356,6 +361,10 @@ PrefabInstance:
     - target: {fileID: 6304207849370122369, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
       propertyPath: m_Name
       value: ProjectileGhost
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304207849370122369, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a75e3c51bd469f4bbb99ae1f6ba2e01, type: 3}
@@ -1081,12 +1090,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 758583397}
+    - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 647885867}
     - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: ghostSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: sightRange
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: ghostChaseTime

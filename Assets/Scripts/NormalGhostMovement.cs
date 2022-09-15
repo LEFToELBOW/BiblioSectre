@@ -12,7 +12,7 @@ public class NormalGhostMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D ghostProjRb;
     [SerializeField] private Vector3 originalScale, changedScale;
     [SerializeField] private Vector3[] positionList;
-    [SerializeField] private Transform castPointN, castPointNE, castPointE, castPointSE, castPointS, castPointSW, castPointW, castPointNW;
+    [SerializeField] private Transform castPointN;
 
     private float time = 0;
     private float interpolationPeriod = .5f;
@@ -58,13 +58,6 @@ public class NormalGhostMovement : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * chasingGhostSpeed);
     }
 
-    /*private void FireProjectile()
-    {
-        
-        StartCoroutine(GhostFireDelay());
-
-    }*/
-
     // detects if player is within line of sight w/ linecast
     private bool CanSeePlayerNS(float distance, Transform castPoint)
     {
@@ -74,7 +67,7 @@ public class NormalGhostMovement : MonoBehaviour
 
         Vector2 endPos = castPointFunc.position + new Vector3(0, 1, 0) * castDist;
 
-        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("Action"));
 
         if (sight.collider != null)
         {
@@ -89,6 +82,7 @@ public class NormalGhostMovement : MonoBehaviour
             }
             Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
         }
+        
         return seeVal;
     }
 
@@ -100,7 +94,7 @@ public class NormalGhostMovement : MonoBehaviour
 
         Vector2 endPos = castPointFunc.position + new Vector3(1, 0, 0) * castDist;
 
-        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("Action"));
 
         if (sight.collider != null)
         {
@@ -115,6 +109,7 @@ public class NormalGhostMovement : MonoBehaviour
             }
             Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
         }
+        
         return seeVal;
     }
 
@@ -126,7 +121,7 @@ public class NormalGhostMovement : MonoBehaviour
 
         Vector2 endPos = castPointFunc.position + new Vector3(1, 1, 0) * castDist;
 
-        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("wall"));
+        RaycastHit2D sight = Physics2D.Linecast(castPointFunc.position, endPos, 1 << LayerMask.NameToLayer("Action"));
 
         if (sight.collider != null)
         {
@@ -141,6 +136,7 @@ public class NormalGhostMovement : MonoBehaviour
             }
             Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
         }
+        
         return seeVal;
     }
 
@@ -167,6 +163,7 @@ public class NormalGhostMovement : MonoBehaviour
             }
             Debug.DrawLine(castPointFunc.position, endPos, Color.blue);
         }
+        
         return seeVal;
     }
 
@@ -214,9 +211,9 @@ public class NormalGhostMovement : MonoBehaviour
     }
 
     // causes the growing ghost to change size via lerp when player in LOS
-    IEnumerator SizeChange()
+    IEnumerator SizeChange(bool growBool)
     {
-        if (growing == true && big == false)
+        if (growBool == true && big == false)
         {
             for (float t = 0; t < 1; t += Time.deltaTime / 3f)
             {
@@ -225,7 +222,8 @@ public class NormalGhostMovement : MonoBehaviour
             }
             big = true;
         }
-        else if (growing == false && big == true)
+        // when player out of sight range this is triggered (returns ghost to normal size)
+        else if (growBool == false && big == true)
         {
             for (float t = 0; t < 1; t += Time.deltaTime / 3f)
             {
@@ -245,13 +243,13 @@ public class NormalGhostMovement : MonoBehaviour
     private void DecideToTarget()
     {
         if ((CanSeePlayerNS(sightRange, castPointN) |
-            CanSeePlayerNS(-sightRange, castPointS) |
-            CanSeePlayerEW(sightRange, castPointE) |
-            CanSeePlayerEW(-sightRange, castPointW) |
-            CanSeePlayerNESW(sightRange, castPointNE) |
-            CanSeePlayerNESW(-sightRange, castPointSW) |
-            CanSeePlayerSENW(sightRange, castPointNW) |
-            CanSeePlayerSENW(-sightRange, castPointSE))
+            CanSeePlayerNS(-sightRange, castPointN) |
+            CanSeePlayerEW(sightRange, castPointN) |
+            CanSeePlayerEW(-sightRange, castPointN) |
+            CanSeePlayerNESW(sightRange, castPointN) |
+            CanSeePlayerNESW(-sightRange, castPointN) |
+            CanSeePlayerSENW(sightRange, castPointN) |
+            CanSeePlayerSENW(-sightRange, castPointN))
             && targeting)
         {
             isTargeting = true;
@@ -267,7 +265,7 @@ public class NormalGhostMovement : MonoBehaviour
             {
                 TargetPlayer();
                 growing = true;
-                StartCoroutine(SizeChange());
+                StartCoroutine(SizeChange(growing));
             }
         }
         
@@ -275,6 +273,8 @@ public class NormalGhostMovement : MonoBehaviour
         else if (targeting == true)
         {
             StartCoroutine(PersistentAttack(ghostChaseTime));
+            growing = false;
+            StartCoroutine(SizeChange(growing));
         }
         else
         {
@@ -288,8 +288,10 @@ public class NormalGhostMovement : MonoBehaviour
     {
 
         DecideToTarget();
+        
         if(projFire)
         {
+            MovePath();
             time += Time.deltaTime;
             if(time > interpolationPeriod)
             {
