@@ -17,7 +17,7 @@ public class NormalGhostMovement : MonoBehaviour
     private float time = 0;
     private float interpolationPeriod = .5f;
 
-
+    private bool projFire;
     private bool isTargeting;
     private Vector2 endPos;
     private int positionIndex = 0;
@@ -261,7 +261,7 @@ public class NormalGhostMovement : MonoBehaviour
             }
             else if (ghostType == "projectile")
             {
-
+                projFire = true;
             }
             else if (ghostType == "grow")
             {
@@ -280,6 +280,7 @@ public class NormalGhostMovement : MonoBehaviour
         {
             MovePath();
             isTargeting = false;
+            projFire = false;
         }
     }
 
@@ -287,7 +288,7 @@ public class NormalGhostMovement : MonoBehaviour
     {
 
         DecideToTarget();
-        if(isTargeting)
+        if(projFire)
         {
             time += Time.deltaTime;
             if(time > interpolationPeriod)
