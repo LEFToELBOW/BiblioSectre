@@ -12,6 +12,7 @@ TagManager:
   - BlueShelf
   - Laser
   - GhostOrb
+  - Ghost
   layers:
   - Default
   - TransparentFX

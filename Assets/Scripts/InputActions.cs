@@ -18,8 +18,8 @@ public class InputActions : MonoBehaviour
     private InputAction move;
     private InputAction fire;
 
-    private bool obtShoot;
-    private bool canShoot;
+    public static bool obtShoot;
+    public static bool canShoot;
     private float charges = 15;
     private bool full;
     private string book;
