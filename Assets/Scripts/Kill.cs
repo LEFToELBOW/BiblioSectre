@@ -15,7 +15,7 @@ public class Kill : MonoBehaviour
                 invincible = true;
                 Debug.Log(invincible);
                 
-                col.transform.position = new Vector2(0,-2);
+                col.transform.position = LevelSet.respawn;
                 
                 PlayerDeathCount++;
                 Debug.Log(PlayerDeathCount.ToString() + " deaths");
