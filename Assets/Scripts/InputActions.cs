@@ -125,6 +125,11 @@ public class InputActions : MonoBehaviour
                         Debug.Log(greenBooks);
                     }
                     break;
+                case "Laser":
+                    obtShoot = true;
+                    canShoot = true;
+                    Destroy(col.gameObject);
+                    break;
             }
             return;
         }
