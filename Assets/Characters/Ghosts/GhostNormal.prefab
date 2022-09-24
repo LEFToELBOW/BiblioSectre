@@ -24,11 +24,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631844848784992428}
   m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: -0.25, y: 0.25, z: 0.0053235525}
+  m_LocalPosition: {x: 0.65, y: -0.7, z: 0.0053235525}
   m_LocalScale: {x: 0.86580086, y: 0.76330054, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1188144928813569304}
+  m_Father: {fileID: 5362884906276224034}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
 --- !u!1 &6304207849370122369
@@ -39,9 +39,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1188144928813569304}
+  - component: {fileID: 5362884906276224034}
   - component: {fileID: 4035918349427354282}
   - component: {fileID: 5895801834060462461}
+  - component: {fileID: 1508225100298292445}
   m_Layer: 7
   m_Name: GhostNormal
   m_TagString: Untagged
@@ -49,15 +50,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1188144928813569304
-Transform:
+--- !u!224 &5362884906276224034
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6304207849370122369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.8025, y: 0.255, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.155, y: 1.3101, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -65,6 +66,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 7.77, y: -2.24}
+  m_SizeDelta: {x: 1.25, y: 1.42}
+  m_Pivot: {x: 0, y: 1}
 --- !u!212 &4035918349427354282
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -106,7 +112,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e77bc669ec4f4dd4e951af2c351a43c1, type: 3}
+  m_Sprite: {fileID: -2073955225, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,7 +140,7 @@ MonoBehaviour:
   sightRange: 3
   ghostChaseTime: 0
   player: {fileID: 0}
-  ghost: {fileID: 1188144928813569304}
+  ghost: {fileID: 5362884906276224034}
   ghostType: normal
   ghostProjectile: {fileID: 0}
   ghostProjRb: {fileID: 0}
@@ -142,3 +148,29 @@ MonoBehaviour:
   changedScale: {x: 0, y: 0, z: 0}
   positionList: []
   castPointN: {fileID: 5184598516713995855}
+  spriteArray:
+  - {fileID: -1910154839, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 786247808, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: -2143208564, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: -1691243756, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 702905357, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: -2073955225, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 2008062848, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 1636631472, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: -1839387652, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 1671719996, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: -1471573469, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: -1368648280, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 1413476175, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: -1420300264, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 661492726, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  - {fileID: 625429927, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
+  spriteRendererVar: {fileID: 0}
+--- !u!222 &1508225100298292445
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304207849370122369}
+  m_CullTransparentMesh: 1
