@@ -8,7 +8,7 @@ public class InputActions : MonoBehaviour
     [SerializeField] private GameObject laser;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed = 2f;
-
+    
     private PlayerControls input;
     private Vector2 moveDirection = Vector2.zero;
 
@@ -23,9 +23,8 @@ public class InputActions : MonoBehaviour
     private float charges = 15;
     private bool full;
     private string book;
-    private float redBooks;
-    private float blueBooks;
-    private float greenBooks;
+    private float redBooks, blueBooks, greenBooks;
+    public static Vector2 animDirection;
 
 
     private void Awake()
@@ -51,9 +50,10 @@ public class InputActions : MonoBehaviour
         fire.Disable();
     }
 
-    private void Update()
+    void Update()
     {
         moveDirection = move.ReadValue<Vector2>();
+        animDirection = moveDirection;
         if(!(moveDirection.x == 0 && moveDirection.y == 0))
         {
             if(obtShoot)
@@ -75,8 +75,10 @@ public class InputActions : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
+        
     }
 
+    // fire laser
     private void Fire(InputAction.CallbackContext context)
     {    
         if((charges < 1) || !obtShoot || !canShoot)
@@ -95,6 +97,7 @@ public class InputActions : MonoBehaviour
         laserRb.AddForce(pos * 500);
     }
 
+    // collection of books
     private void OnCollisionEnter2D(Collision2D col)
     {
         if(full)
@@ -158,8 +161,6 @@ public class InputActions : MonoBehaviour
                 break;
         }  
     }
-
-
 
     
 

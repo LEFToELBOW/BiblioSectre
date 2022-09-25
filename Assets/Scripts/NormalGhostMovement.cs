@@ -179,30 +179,31 @@ public class NormalGhostMovement : MonoBehaviour
     {
         if (ghostType == "normal")
         {
-            AnimateGhostLogic(AnimateGhostDirection());
+            AnimateGhostDirection(AnimateGhostLogic());
             TargetPlayer();
         }
         else if (ghostType == "projectile")
         {
             //FireProjectile();
-            AnimateGhostLogic(AnimateGhostDirection());
+            AnimateGhostDirection(AnimateGhostLogic());
             MovePath();
         }
         else if (ghostType == "grow")
         {  
-            AnimateGhostLogic(AnimateGhostDirection());
+            AnimateGhostDirection(AnimateGhostLogic());
             TargetPlayer();
             growing = false;
         }
         else
         {
-            AnimateGhostLogic(AnimateGhostDirection());
+            AnimateGhostDirection(AnimateGhostLogic());
             MovePath();
         }
         yield return new WaitForSeconds(chaseTime);
         targeting = false;
     }
 
+    // launches projectile in random direction when player is detected
     private void Fire()
     {
         GameObject ghostProjIns = Instantiate(ghostProjectile, new Vector2(ghost.transform.position.x, ghost.transform.position.y), Quaternion.identity);
@@ -267,18 +268,19 @@ public class NormalGhostMovement : MonoBehaviour
             if (ghostType == "normal")
             {
                 TargetPlayer();
-                AnimateGhostLogic(8);
+                AnimateGhostDirection(AnimateGhostLogic());
                 
             }
             else if (ghostType == "projectile")
             {
                 projFire = true;
-                AnimateGhostLogic(8);
+                AnimateGhostDirection(AnimateGhostLogic());
             }
             else if (ghostType == "grow")
             {
                 TargetPlayer();
                 growing = true;
+                AnimateGhostDirection(AnimateGhostLogic());
                 StartCoroutine(SizeChange(growing));
             }
         }
@@ -298,7 +300,8 @@ public class NormalGhostMovement : MonoBehaviour
         }
     }
 
-    private void AnimateGhostLogic(int animDirectionOffset)
+    // takes int from ghostdirection and applies that offset to the for loop so that the looping sprites match w/ movement
+    private void AnimateGhostDirection(int animDirectionOffset)
     {
         for (int i = 0; i < 4; i++)
         {
@@ -306,9 +309,9 @@ public class NormalGhostMovement : MonoBehaviour
             if (animTime > 0.5f)
             {
                 spriteRendererVar.sprite = spriteArray[i + animDirectionOffset];
-                //Debug.Log(spriteRendererVar.sprite);
                 animTime = 0f;
             }
+            
             if(i == 3)
             {
                 for (int j = 3; j > 0; j = j - 1)
@@ -316,7 +319,6 @@ public class NormalGhostMovement : MonoBehaviour
                     if (animTime > 0.5f)
                     {
                         spriteRendererVar.sprite = spriteArray[j + animDirectionOffset];
-                        //Debug.Log(spriteRendererVar.sprite);
                         animTime = 0f;
                     }
                 }
@@ -324,12 +326,14 @@ public class NormalGhostMovement : MonoBehaviour
         }
     }
 
-    private int AnimateGhostDirection()
+    // based on ghost movement vector, outputs a number corresponding to the 4 directions
+    private int AnimateGhostLogic()
     {
         int animDirectionSelect = 0;
         float animDelay = 0f;
         animDelay += Time.fixedDeltaTime;
         
+        // reduce switching problems when targeting player
         if (isTargeting == true && animDelay > 2f)
         {
             /*if (moveDirection.x < 0f)
@@ -367,18 +371,22 @@ public class NormalGhostMovement : MonoBehaviour
         }
         else
         {
+            // left
             if (moveDirection.x < 0f && Mathf.Abs(moveDirection.y) < Mathf.Abs(moveDirection.x))
             {
                 animDirectionSelect = 8;
             }
+            // right
             else if (moveDirection.x > 0f && Mathf.Abs(moveDirection.y) < Mathf.Abs(moveDirection.x))
             {
                 animDirectionSelect = 12;
             }
+            // moving to bkgd
             else if (moveDirection.y > 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
             {
                 animDirectionSelect = 0;
             }
+            // moving to foreground
             else if (moveDirection.y < 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
             {
                 animDirectionSelect = 4;
@@ -392,30 +400,14 @@ public class NormalGhostMovement : MonoBehaviour
         return animDirectionSelect;
     }
     
-    /*private void Update()
-    {
-
-        DecideToTarget();
-        AnimateGhost();
-        
-        if(projFire)
-        {
-            MovePath();
-            fireTime += Time.deltaTime;
-            if(fireTime > interpolationPeriod)
-            {
-                Fire();
-                fireTime = 0f;
-            }
-        }
-    }*/
 
     private void FixedUpdate()
     {
 
         DecideToTarget();
-        AnimateGhostLogic(AnimateGhostDirection());
+        AnimateGhostDirection(AnimateGhostLogic());
         
+        // time delay for projectile ghost to fire when it is targeting player
         if(projFire)
         {
             MovePath();
