@@ -138,7 +138,7 @@ MonoBehaviour:
   normalGhostSpeed: 2
   chasingGhostSpeed: 3
   sightRange: 3
-  ghostChaseTime: 0
+  ghostChaseTime: 2
   player: {fileID: 0}
   ghost: {fileID: 5362884906276224034}
   ghostType: normal
@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: -1420300264, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
   - {fileID: 661492726, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
   - {fileID: 625429927, guid: 8949493a06bfcea4cb3633a5d5cab236, type: 3}
-  spriteRendererVar: {fileID: 0}
+  spriteRendererVar: {fileID: 4035918349427354282}
 --- !u!222 &1508225100298292445
 CanvasRenderer:
   m_ObjectHideFlags: 0

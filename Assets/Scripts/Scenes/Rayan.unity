@@ -406,6 +406,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8901051833860838917, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1188144928813569304, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -456,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 647885867}
     - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
       propertyPath: positionList.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
       propertyPath: positionList.Array.data[0].x
@@ -473,6 +477,18 @@ PrefabInstance:
     - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
       propertyPath: positionList.Array.data[1].y
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
+      propertyPath: positionList.Array.data[2].x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
+      propertyPath: positionList.Array.data[2].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895801834060462461, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
+      propertyPath: positionList.Array.data[3].x
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 6304207849370122369, guid: 1c08b64cf13b84c4096545976a7cc5d1, type: 3}
       propertyPath: m_Name
@@ -583,6 +599,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 647885867}
+    - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
+      propertyPath: ghostChaseTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5895801834060462461, guid: ead5153a6ba660b4eae00dd1d12d454f, type: 3}
       propertyPath: spriteRendererVar
       value: 

@@ -179,24 +179,24 @@ public class NormalGhostMovement : MonoBehaviour
     {
         if (ghostType == "normal")
         {
-            AnimateGhostLogic(8);
+            AnimateGhostLogic(AnimateGhostDirection());
             TargetPlayer();
         }
         else if (ghostType == "projectile")
         {
             //FireProjectile();
-            AnimateGhostLogic(8);
+            AnimateGhostLogic(AnimateGhostDirection());
             MovePath();
         }
         else if (ghostType == "grow")
         {  
-            AnimateGhostLogic(8);
+            AnimateGhostLogic(AnimateGhostDirection());
             TargetPlayer();
             growing = false;
         }
         else
         {
-            AnimateGhostLogic(8);
+            AnimateGhostLogic(AnimateGhostDirection());
             MovePath();
         }
         yield return new WaitForSeconds(chaseTime);
@@ -306,7 +306,7 @@ public class NormalGhostMovement : MonoBehaviour
             if (animTime > 0.5f)
             {
                 spriteRendererVar.sprite = spriteArray[i + animDirectionOffset];
-                Debug.Log(spriteRendererVar.sprite);
+                //Debug.Log(spriteRendererVar.sprite);
                 animTime = 0f;
             }
             if(i == 3)
@@ -316,7 +316,7 @@ public class NormalGhostMovement : MonoBehaviour
                     if (animTime > 0.5f)
                     {
                         spriteRendererVar.sprite = spriteArray[j + animDirectionOffset];
-                        Debug.Log(spriteRendererVar.sprite);
+                        //Debug.Log(spriteRendererVar.sprite);
                         animTime = 0f;
                     }
                 }
@@ -327,19 +327,43 @@ public class NormalGhostMovement : MonoBehaviour
     private int AnimateGhostDirection()
     {
         int animDirectionSelect = 0;
-        //float animDelay = 0;
-        //animDelay += Time.fixedDeltaTime;
+        float animDelay = 0f;
+        animDelay += Time.fixedDeltaTime;
         
-        if (isTargeting == true)
+        if (isTargeting == true && animDelay > 2f)
         {
-            if (moveDirection.x < 0f)
+            /*if (moveDirection.x < 0f)
             {
                 animDirectionSelect = 8;
+                animDelay = 0f;
             }
             else if (moveDirection.x > 0f)
             {
                 animDirectionSelect = 12;
+                animDelay = 0f;
+            }*/
+            if (moveDirection.x < 0f && Mathf.Abs(moveDirection.y) < Mathf.Abs(moveDirection.x))
+            {
+                animDirectionSelect = 8;
             }
+            else if (moveDirection.x > 0f && Mathf.Abs(moveDirection.y) < Mathf.Abs(moveDirection.x))
+            {
+                animDirectionSelect = 12;
+            }
+            else if (moveDirection.y > 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
+            {
+                animDirectionSelect = 0;
+            }
+            else if (moveDirection.y < 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
+            {
+                animDirectionSelect = 4;
+            }
+            else
+            {
+                animDirectionSelect = 0;
+            }
+            animDelay = 0f;
+            Debug.Log("Delay done");
         }
         else
         {
@@ -353,21 +377,7 @@ public class NormalGhostMovement : MonoBehaviour
             }
             else if (moveDirection.y > 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
             {
-                if (isTargeting == true)
-                {
-                    if (moveDirection.x < 0f)
-                    {
-                        animDirectionSelect = 8;
-                    }
-                    else if (moveDirection.x > 0f)
-                    {
-                        animDirectionSelect = 12;
-                    }
-                }
-                else
-                {
-                    animDirectionSelect = 0;
-                }
+                animDirectionSelect = 0;
             }
             else if (moveDirection.y < 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
             {

@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6652841d20522a049bd73b455c2dba85, type: 3}
+  m_Sprite: {fileID: 989541761, guid: 152293d5f2edf9749b321155810ab564, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -143,6 +143,24 @@ MonoBehaviour:
   changedScale: {x: 0, y: 0, z: 0}
   positionList: []
   castPointN: {fileID: 5184598516713995855}
+  spriteArray:
+  - {fileID: -689371285, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 2050173780, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 2080483547, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 614859604, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 704948286, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 989541761, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 726905684, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: -1349815892, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 1282124184, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: -1589003643, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: -2036347040, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 2036458226, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 2132258961, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 1221897551, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: 7970202, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  - {fileID: -1738672949, guid: 152293d5f2edf9749b321155810ab564, type: 3}
+  spriteRendererVar: {fileID: 4035918349427354282}
 --- !u!61 &7530010170700518634
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,7 +168,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6304207849370122369}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -160,7 +178,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1.25, y: 1.4166666}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
