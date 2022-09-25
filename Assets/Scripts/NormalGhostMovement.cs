@@ -13,13 +13,15 @@ public class NormalGhostMovement : MonoBehaviour
     [SerializeField] private Vector3 originalScale, changedScale;
     [SerializeField] private Vector3[] positionList;
     [SerializeField] private Transform castPointN;
+    [SerializeField] private Sprite[] spriteArray;
+    [SerializeField] private SpriteRenderer spriteRendererVar;
 
-    private float time = 0;
+    private float fireTime, animTime = 0;
     private float interpolationPeriod = .5f;
 
     private bool projFire;
     private bool isTargeting;
-    private Vector2 endPos;
+    private Vector2 endPos, moveDirection;
     private int positionIndex = 0;
     private bool targeting, projectileInstantiation, growing, big;
 
@@ -30,13 +32,17 @@ public class NormalGhostMovement : MonoBehaviour
         big = false;
         growing = false;
         Time.timeScale = 1.0f;
+        spriteRendererVar.sprite = spriteArray[5];
     }
 
     // ghost moves along path made up of a list of points (can be inputted manually or use empty gameObjects)
     private void MovePath()
     {
 
-        transform.position = Vector2.MoveTowards(transform.position, positionList[positionIndex], Time.deltaTime * normalGhostSpeed);
+        //transform.position = Vector2.MoveTowards(transform.position, positionList[positionIndex], Time.deltaTime * normalGhostSpeed);
+        transform.position = Vector2.MoveTowards(transform.position, positionList[positionIndex], Time.fixedDeltaTime * normalGhostSpeed);
+        moveDirection = (positionList[positionIndex] - transform.position).normalized;
+        
 
         if (transform.position == positionList[positionIndex])
         {
@@ -55,7 +61,8 @@ public class NormalGhostMovement : MonoBehaviour
     // chases player
     private void TargetPlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * chasingGhostSpeed);
+        transform.position = Vector2.MoveTowards(transform.position, player.position, Time.fixedDeltaTime * chasingGhostSpeed);
+        moveDirection = (player.position - transform.position).normalized;
     }
 
     // detects if player is within line of sight w/ linecast
@@ -172,20 +179,24 @@ public class NormalGhostMovement : MonoBehaviour
     {
         if (ghostType == "normal")
         {
+            AnimateGhostLogic(8);
             TargetPlayer();
         }
         else if (ghostType == "projectile")
         {
             //FireProjectile();
+            AnimateGhostLogic(8);
             MovePath();
         }
         else if (ghostType == "grow")
-        {
+        {  
+            AnimateGhostLogic(8);
             TargetPlayer();
             growing = false;
         }
         else
         {
+            AnimateGhostLogic(8);
             MovePath();
         }
         yield return new WaitForSeconds(chaseTime);
@@ -256,10 +267,13 @@ public class NormalGhostMovement : MonoBehaviour
             if (ghostType == "normal")
             {
                 TargetPlayer();
+                AnimateGhostLogic(8);
+                
             }
             else if (ghostType == "projectile")
             {
                 projFire = true;
+                AnimateGhostLogic(8);
             }
             else if (ghostType == "grow")
             {
@@ -284,20 +298,124 @@ public class NormalGhostMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void AnimateGhostLogic(int animDirectionOffset)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            animTime += Time.fixedDeltaTime;
+            if (animTime > 0.5f)
+            {
+                spriteRendererVar.sprite = spriteArray[i + animDirectionOffset];
+                Debug.Log(spriteRendererVar.sprite);
+                animTime = 0f;
+            }
+            if(i == 3)
+            {
+                for (int j = 3; j > 0; j = j - 1)
+                {
+                    if (animTime > 0.5f)
+                    {
+                        spriteRendererVar.sprite = spriteArray[j + animDirectionOffset];
+                        Debug.Log(spriteRendererVar.sprite);
+                        animTime = 0f;
+                    }
+                }
+            }
+        }
+    }
+
+    private int AnimateGhostDirection()
+    {
+        int animDirectionSelect = 0;
+        //float animDelay = 0;
+        //animDelay += Time.fixedDeltaTime;
+        
+        if (isTargeting == true)
+        {
+            if (moveDirection.x < 0f)
+            {
+                animDirectionSelect = 8;
+            }
+            else if (moveDirection.x > 0f)
+            {
+                animDirectionSelect = 12;
+            }
+        }
+        else
+        {
+            if (moveDirection.x < 0f && Mathf.Abs(moveDirection.y) < Mathf.Abs(moveDirection.x))
+            {
+                animDirectionSelect = 8;
+            }
+            else if (moveDirection.x > 0f && Mathf.Abs(moveDirection.y) < Mathf.Abs(moveDirection.x))
+            {
+                animDirectionSelect = 12;
+            }
+            else if (moveDirection.y > 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
+            {
+                if (isTargeting == true)
+                {
+                    if (moveDirection.x < 0f)
+                    {
+                        animDirectionSelect = 8;
+                    }
+                    else if (moveDirection.x > 0f)
+                    {
+                        animDirectionSelect = 12;
+                    }
+                }
+                else
+                {
+                    animDirectionSelect = 0;
+                }
+            }
+            else if (moveDirection.y < 0f && Mathf.Abs(moveDirection.x) < Mathf.Abs(moveDirection.y))
+            {
+                animDirectionSelect = 4;
+            }
+            else
+            {
+                animDirectionSelect = 0;
+            }
+        }
+
+        return animDirectionSelect;
+    }
+    
+    /*private void Update()
     {
 
         DecideToTarget();
+        AnimateGhost();
         
         if(projFire)
         {
             MovePath();
-            time += Time.deltaTime;
-            if(time > interpolationPeriod)
+            fireTime += Time.deltaTime;
+            if(fireTime > interpolationPeriod)
             {
                 Fire();
-                time = 0f;
+                fireTime = 0f;
+            }
+        }
+    }*/
+
+    private void FixedUpdate()
+    {
+
+        DecideToTarget();
+        AnimateGhostLogic(AnimateGhostDirection());
+        
+        if(projFire)
+        {
+            MovePath();
+            fireTime += Time.deltaTime;
+            if(fireTime > interpolationPeriod)
+            {
+                Fire();
+                fireTime = 0f;
             }
         }
     }
+    
 }
