@@ -12,7 +12,7 @@ public class Kill : MonoBehaviour
         {
             if(invincible == false)
             {
-                invincible = true;
+                //invincible = true;
                 Debug.Log(invincible);
                 
                 col.transform.position = LevelSet.respawn;
@@ -20,11 +20,12 @@ public class Kill : MonoBehaviour
                 PlayerDeathCount++;
                 Debug.Log(PlayerDeathCount.ToString() + " deaths");
                 
-                StartCoroutine(waitToStop());
+                //StartCoroutine(waitToStop());
             }
             else
             {
-                Destroy(this.gameObject); 
+                //Destroy(this.gameObject); 
+                invincible = false;
             }             
         }
     }

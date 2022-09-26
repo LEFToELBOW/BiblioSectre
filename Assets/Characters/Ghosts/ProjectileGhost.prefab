@@ -131,9 +131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalGhostSpeed: 2
-  chasingGhostSpeed: 3
-  sightRange: 3
-  ghostChaseTime: 0
+  chasingGhostSpeed: 3.5
+  sightRange: 4
+  ghostChaseTime: 0.5
   player: {fileID: 0}
   ghost: {fileID: 1188144928813569304}
   ghostType: projectile
