@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSet : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LevelSet : MonoBehaviour
     private GameObject[] books;
     public static Vector2 respawn;
     private float totalBooks;
+
     
 
     private void Start()
@@ -24,9 +26,21 @@ public class LevelSet : MonoBehaviour
     {
         Debug.Log(level);
         totalBooks = InputActions.redBooks + InputActions.blueBooks + InputActions.greenBooks;
-        if(totalBooks == 25)
+        if(totalBooks == 25 && level == 0)
         {
             level = 2;
+            InputActions.redBooks = 0;
+            InputActions.blueBooks = 0;
+            InputActions.greenBooks = 0;
+            totalBooks = 0;
+        }
+        if(totalBooks == 15 && level == -1)
+        {
+            level = 3;
+            InputActions.redBooks = 0;
+            InputActions.blueBooks = 0;
+            InputActions.greenBooks = 0;
+            totalBooks = 0;
         }
     }
 
@@ -45,7 +59,6 @@ public class LevelSet : MonoBehaviour
                 player.transform.position = respawn;
                 InputActions.canShoot = false;
                 InputActions.obtShoot = false;
-                LightDim.dim = 5;
 
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12.5f, -8.5f), Random.Range(5.5f, 15)), Quaternion.identity);
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12.5f, -8.5f), Random.Range(5.5f, 15)), Quaternion.identity);
@@ -92,25 +105,34 @@ public class LevelSet : MonoBehaviour
                 InputActions.canShoot = false;
                 InputActions.obtShoot = false;
 
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-5, -1.8f), Random.Range(63, 70)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-5, -1.8f), Random.Range(72, 80)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(2, 5), Random.Range(63, 70)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(2, 5), Random.Range(72, 80)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(19.5f, 25), Random.Range(47.5f, 54.3f)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(19.5f, 25), Random.Range(47.5f, 54.3f)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(20, 25), Random.Range(46, 55)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(33, 36), Random.Range(46, 55)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(25, 34), Random.Range(57.5f, 61.5f)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(25, 34), Random.Range(57.5f, 61.5f)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -18.5f), Random.Range(46, 55)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-32, -36), Random.Range(46, 55)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-25.5f, -19), Random.Range(47.7f, 53.7f)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-25.5f, -19), Random.Range(47.7f, 53.7f)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-18, -13), Random.Range(80, 89)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-18, -13), Random.Range(80, 89)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-33.5f, -26.5f), Random.Range(59.5f, 61.5f)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(13, 18), Random.Range(80, 89)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(13, 18), Random.Range(80, 89)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12.5f, 11.5f), Random.Range(63.7f, 65)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12.5f, 11.5f), Random.Range(63.7f, 65)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12.5f, 11.5f), Random.Range(63.7f, 65)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(16, 25), Random.Range(75.2f, 92)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(16, 25), Random.Range(75.2f, 92)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(16, 25), Random.Range(75.2f, 92)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-21, -16), Random.Range(75.2f, 92)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-21, -16), Random.Range(75.2f, 92)), Quaternion.identity);
+
+                level = -1;
 
                 break;
             case 3:
+
+
                 break;
         }
     }

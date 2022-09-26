@@ -20,7 +20,7 @@ public class InputActions : MonoBehaviour
 
     public static bool obtShoot;
     public static bool canShoot;
-    private float charges = 15;
+    private float charges = 5;
     private bool full;
     private string book;
     public static float redBooks, blueBooks, greenBooks;
