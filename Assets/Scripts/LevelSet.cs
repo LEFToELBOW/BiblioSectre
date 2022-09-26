@@ -9,7 +9,7 @@ public class LevelSet : MonoBehaviour
     public static float level = 1f;
     private GameObject[] books;
     public static Vector2 respawn;
-
+    private float totalBooks;
     
 
     private void Start()
@@ -19,40 +19,70 @@ public class LevelSet : MonoBehaviour
         books[1] = blueBook;
         books[2] = greenBook;
     }
-        
+
+    private void Update()
+    {
+        Debug.Log(level);
+        totalBooks = InputActions.redBooks + InputActions.blueBooks + InputActions.greenBooks;
+        if(totalBooks == 25)
+        {
+            level = 2;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag != "Player")
+        if (col.gameObject.tag != "Player")
         {
             return;
         }
-        switch(level)
+        switch (level)
         {
             case 1:
                 Debug.Log("Setting Level");
-                
-                respawn = new Vector2(0,-2);
+
+                respawn = new Vector2(0, -2);
                 player.transform.position = respawn;
                 InputActions.canShoot = false;
                 InputActions.obtShoot = false;
                 LightDim.dim = 5;
 
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-20, -17), Random.Range(5, 10)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(17, 20), Random.Range(5, 10)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-12, -8), Random.Range(5, 10)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(8, 12), Random.Range(5, 10)), Quaternion.identity);
-
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-20, -17), Random.Range(15, 20)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(17, 20), Random.Range(15, 20)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-12, -8), Random.Range(15, 20)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(8, 12), Random.Range(15, 20)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12.5f, -8.5f), Random.Range(5.5f, 15)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12.5f, -8.5f), Random.Range(5.5f, 15)), Quaternion.identity);
                 
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-20, -17), Random.Range(25, 30)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(17, 20), Random.Range(25, 30)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-12, -8), Random.Range(25, 30)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(8, 12), Random.Range(25, 30)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(8.5f, 12.5f), Random.Range(5.5f, 15)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(8.5f, 12.5f), Random.Range(5.5f, 15)), Quaternion.identity);
+               
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
 
-                level++;
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-4.5f, 4.9f), Random.Range(15.5f, 19.5f)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-4.5f, 4.9f), Random.Range(15.5f, 19.5f)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-0.8f, 3), Random.Range(16, 23)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-12f, -3.5f), Random.Range(29, 32)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(6, 12.5f), Random.Range(29, 32)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
+                
+                level = 0;
+
                 break;
             case 2:
                 Debug.Log("Going to Level 2");
@@ -61,29 +91,27 @@ public class LevelSet : MonoBehaviour
                 player.transform.position = respawn;
                 InputActions.canShoot = false;
                 InputActions.obtShoot = false;
-                LightDim.dim = 1;
 
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-5,-1.8f), Random.Range(63, 70)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-5, -1.8f), Random.Range(72, 80)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(2, 5), Random.Range(63, 70)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(2, 5), Random.Range(72, 80)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-5, -1.8f), Random.Range(63, 70)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-5, -1.8f), Random.Range(72, 80)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(2, 5), Random.Range(63, 70)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(2, 5), Random.Range(72, 80)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(20, 25), Random.Range(46, 55)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(33, 36), Random.Range(46, 55)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(20, 25), Random.Range(46, 55)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(33, 36), Random.Range(46, 55)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-24.5f, -18.5f), Random.Range(46, 55)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-32, -36), Random.Range(46, 55)), Quaternion.identity);
-                
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-18, -13), Random.Range(80, 89)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(-18, -13), Random.Range(80, 89)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -18.5f), Random.Range(46, 55)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-32, -36), Random.Range(46, 55)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(13, 18), Random.Range(80, 89)), Quaternion.identity);
-                Instantiate(books[Random.Range(0,3)], new Vector2(Random.Range(13, 18), Random.Range(80, 89)), Quaternion.identity);
-                
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-18, -13), Random.Range(80, 89)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-18, -13), Random.Range(80, 89)), Quaternion.identity);
+
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(13, 18), Random.Range(80, 89)), Quaternion.identity);
+                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(13, 18), Random.Range(80, 89)), Quaternion.identity);
+
                 break;
             case 3:
                 break;
         }
     }
-    
 }

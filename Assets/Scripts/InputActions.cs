@@ -23,7 +23,7 @@ public class InputActions : MonoBehaviour
     private float charges = 15;
     private bool full;
     private string book;
-    private float redBooks, blueBooks, greenBooks;
+    public static float redBooks, blueBooks, greenBooks;
     public static Vector2 animDirection;
 
 
@@ -61,7 +61,6 @@ public class InputActions : MonoBehaviour
                 canShoot = true;
             }
             pos = moveDirection;
-            //Debug.Log(pos);
         }
         else
         {
