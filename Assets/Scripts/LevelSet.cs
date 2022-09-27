@@ -24,7 +24,6 @@ public class LevelSet : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(level);
         totalBooks = InputActions.redBooks + InputActions.blueBooks + InputActions.greenBooks;
         if(totalBooks == 25 && level == 0)
         {
@@ -53,8 +52,6 @@ public class LevelSet : MonoBehaviour
         switch (level)
         {
             case 1:
-                Debug.Log("Setting Level");
-
                 respawn = new Vector2(0, -2);
                 player.transform.position = respawn;
                 InputActions.canShoot = false;
@@ -98,8 +95,6 @@ public class LevelSet : MonoBehaviour
 
                 break;
             case 2:
-                Debug.Log("Going to Level 2");
-
                 respawn = new Vector2(0, 50);
                 player.transform.position = respawn;
                 InputActions.canShoot = false;
