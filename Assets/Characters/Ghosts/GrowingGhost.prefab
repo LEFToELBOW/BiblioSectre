@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091a92f5404d6224abd01a3dea8754b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalGhostSpeed: 2
-  chasingGhostSpeed: 4.5
+  normalGhostSpeed: 4
+  chasingGhostSpeed: 5.5
   sightRange: 5
   ghostChaseTime: 3
   player: {fileID: 0}

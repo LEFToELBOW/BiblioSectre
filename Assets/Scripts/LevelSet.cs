@@ -25,7 +25,7 @@ public class LevelSet : MonoBehaviour
     private void Update()
     {
         totalBooks = InputActions.redBooks + InputActions.blueBooks + InputActions.greenBooks;
-        if(totalBooks == 25 && level == 0)
+        if(totalBooks == 17 && level == 0)
         {
             level = 2;
             InputActions.redBooks = 0;
@@ -65,11 +65,7 @@ public class LevelSet : MonoBehaviour
                
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 24.5f), Random.Range(5, 17)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.5f, -17.5f), Random.Range(5, 17)), Quaternion.identity);
 
@@ -83,11 +79,7 @@ public class LevelSet : MonoBehaviour
 
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(-24.8f, -17.5f), Random.Range(20.5f, 38)), Quaternion.identity);
 
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
-                Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
                 Instantiate(books[Random.Range(0, 3)], new Vector2(Random.Range(17.5f, 23), Random.Range(20.5f, 38)), Quaternion.identity);
                 
@@ -127,7 +119,7 @@ public class LevelSet : MonoBehaviour
                 break;
             case 3:
 
-
+                SceneManager.LoadScene("winScreen");
                 break;
         }
     }

@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InputActions : MonoBehaviour
 { 
     [SerializeField] private GameObject laser;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed = 2f;
+
+    [SerializeField] private GameObject RedO;
+    [SerializeField] private GameObject BlueO;
+    [SerializeField] private GameObject GreenO;
+
+    private TextMesh holdRed, holdBlue, holdGreen;
     
     private PlayerControls input;
     private Vector2 moveDirection = Vector2.zero;
@@ -30,7 +37,15 @@ public class InputActions : MonoBehaviour
     private void Awake()
     {
         input = new PlayerControls();
+        holdRed = RedO.GetComponent<TextMesh>();
+        holdBlue = BlueO.GetComponent<TextMesh>();
+        holdGreen = GreenO.GetComponent<TextMesh>();
+
+        RedO.SetActive(false);
+        BlueO.SetActive(false);
+        GreenO.SetActive(false); 
     }
+
     private void OnEnable()
     {   
         move = input.Player.Move;
@@ -97,7 +112,7 @@ public class InputActions : MonoBehaviour
     }
 
     // collection of books
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if(full)
         {
@@ -108,7 +123,7 @@ public class InputActions : MonoBehaviour
                     {
                         full = false;
                         redBooks++;   
-                        Debug.Log(redBooks);                     
+                        RedO.SetActive(false);                   
                     }
                     break;
                 case "BlueShelf":
@@ -116,7 +131,7 @@ public class InputActions : MonoBehaviour
                     {
                         full = false;
                         blueBooks++;
-                        Debug.Log(blueBooks);
+                        BlueO.SetActive(false);
                     }
                     break;
                 case "GreenShelf":
@@ -124,7 +139,7 @@ public class InputActions : MonoBehaviour
                     {
                         full = false;
                         greenBooks++;
-                        Debug.Log(greenBooks);
+                        GreenO.SetActive(false);
                     }
                     break;
                 case "Laser":
@@ -144,16 +159,19 @@ public class InputActions : MonoBehaviour
                 book = "Red";
                 full = true;
                 Destroy(col.gameObject);
+                RedO.SetActive(true);
                 break;
             case "Blue":             
                 book = "Blue";
                 full = true;
                 Destroy(col.gameObject);
+                BlueO.SetActive(true);
                 break;
             case "Green":
                 book = "Green";
                 full = true;
                 Destroy(col.gameObject);
+                GreenO.SetActive(true);
                 break;
             case "Laser":
                 charges += 5;
