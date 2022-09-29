@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Kill : MonoBehaviour
 {
-    public static int PlayerDeathCount;
+    //public static int PlayerDeathCount;
+
+    void Start()
+    {
+        //PlayerDeathCount = 0;
+    }
     private static bool invincible = false;
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -17,8 +22,8 @@ public class Kill : MonoBehaviour
                 
                 col.transform.position = LevelSet.respawn;
                 
-                PlayerDeathCount++;
-                Debug.Log(PlayerDeathCount.ToString() + " deaths");
+                InputActions.playerDeathCount++;
+                //Debug.Log(PlayerDeathCount.ToString() + " deaths");
                 
                 //StartCoroutine(waitToStop());
             }
@@ -26,6 +31,7 @@ public class Kill : MonoBehaviour
             {
                 //Destroy(this.gameObject); 
                 invincible = false;
+                //PlayerDeathCount++;
             }             
         }
     }
