@@ -14,6 +14,7 @@ public class InputActions : MonoBehaviour
     [SerializeField] private GameObject BlueO;
     [SerializeField] private GameObject GreenO;
 
+
     private TextMesh holdRed, holdBlue, holdGreen;
     
     private PlayerControls input;

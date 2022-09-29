@@ -12,10 +12,14 @@ public class LevelSet : MonoBehaviour
     public static Vector2 respawn;
     private float totalBooks;
 
+    [SerializeField] private GameObject Holding;
+    private TextMesh hold;
+
     
 
     private void Start()
     {
+        hold = Holding.GetComponent<TextMesh>();
         books = new GameObject[3];
         books[0] = redBook;
         books[1] = blueBook;
@@ -32,6 +36,8 @@ public class LevelSet : MonoBehaviour
             InputActions.blueBooks = 0;
             InputActions.greenBooks = 0;
             totalBooks = 0;
+            hold.text = "Advance to Next Level";
+            Holding.transform.position = new Vector2(0, 0);
         }
         if(totalBooks == 15 && level == -1)
         {
@@ -87,6 +93,8 @@ public class LevelSet : MonoBehaviour
 
                 break;
             case 2:
+                hold.text = "Holding: ";
+                Holding.transform.position = new Vector2(-250, -300);
                 respawn = new Vector2(0, 50);
                 player.transform.position = respawn;
                 InputActions.canShoot = false;
