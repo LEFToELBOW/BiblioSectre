@@ -28,7 +28,7 @@ public class InputActions : MonoBehaviour
 
     public static bool obtShoot;
     public static bool canShoot;
-    public static float charges, playerDeathCount;
+    private float charges;
     private bool full;
     private string book;
     public static float redBooks, blueBooks, greenBooks;
@@ -110,7 +110,6 @@ public class InputActions : MonoBehaviour
         laserIns.gameObject.layer = LayerMask.NameToLayer("Laser");
 
         laserRb.AddForce(pos * 500);
-
     }
 
     // collection of books
@@ -176,7 +175,7 @@ public class InputActions : MonoBehaviour
                 GreenO.SetActive(true);
                 break;
             case "Laser":
-                charges += 10;
+                charges += 5;
                 obtShoot = true;
                 canShoot = true;
                 Destroy(col.gameObject);
