@@ -16,6 +16,8 @@ public class NormalGhostMovement : MonoBehaviour
     [SerializeField] private Sprite[] spriteArray;
     [SerializeField] private SpriteRenderer spriteRendererVar;
 
+    [SerializeField] private AudioSource GhostLaser;
+
     private float fireTime, animTime = 0;
     private float interpolationPeriod = .5f;
 
@@ -217,6 +219,7 @@ public class NormalGhostMovement : MonoBehaviour
         //.Normalize();
         ghostProjIns.gameObject.layer = LayerMask.NameToLayer("wall");   
         ghostProjRb.AddForce(randomVector * 800);
+        GhostLaser.Play();
 
     
         

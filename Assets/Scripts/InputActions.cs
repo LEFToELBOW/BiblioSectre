@@ -14,6 +14,8 @@ public class InputActions : MonoBehaviour
     [SerializeField] private GameObject BlueO;
     [SerializeField] private GameObject GreenO;
 
+    [SerializeField] private AudioSource PlayerLaser;
+    [SerializeField] private AudioSource BookCollect;
 
     private TextMesh holdRed, holdBlue, holdGreen;
     
@@ -100,7 +102,8 @@ public class InputActions : MonoBehaviour
         { 
             return;
         }
-        
+
+        PlayerLaser.Play();
         charges--;
         GameObject laserIns = Instantiate(laser, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         LaserColKill laserEnd = laserIns.GetComponent<LaserColKill>();
@@ -161,18 +164,21 @@ public class InputActions : MonoBehaviour
                 full = true;
                 Destroy(col.gameObject);
                 RedO.SetActive(true);
+                BookCollect.Play();
                 break;
             case "Blue":             
                 book = "Blue";
                 full = true;
                 Destroy(col.gameObject);
                 BlueO.SetActive(true);
+                BookCollect.Play();
                 break;
             case "Green":
                 book = "Green";
                 full = true;
                 Destroy(col.gameObject);
                 GreenO.SetActive(true);
+                BookCollect.Play();
                 break;
             case "Laser":
                 charges += 5;

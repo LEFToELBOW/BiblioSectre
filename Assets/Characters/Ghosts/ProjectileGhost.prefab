@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalGhostSpeed: 3
-  chasingGhostSpeed: 3.5
+  chasingGhostSpeed: 3
   sightRange: 4
   ghostChaseTime: 0.5
   player: {fileID: 0}
