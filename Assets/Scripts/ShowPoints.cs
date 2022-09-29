@@ -13,6 +13,6 @@ public class ShowPoints : MonoBehaviour
     }
     private void Update()
     {
-        pointsDisplay.text = (Timer.timeRemaining * 10).ToString();
+        pointsDisplay.text = "Points: " + (Timer.timeRemaining * 15);
     }
 }
