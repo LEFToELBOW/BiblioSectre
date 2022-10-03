@@ -218,7 +218,7 @@ public class NormalGhostMovement : MonoBehaviour
         Vector2 randomVector = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         //.Normalize();
         ghostProjIns.gameObject.layer = LayerMask.NameToLayer("wall");   
-        ghostProjRb.AddForce(randomVector * 800);
+        ghostProjRb.AddForce(randomVector * 1000);
         GhostLaser.Play();
 
     

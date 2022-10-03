@@ -112,7 +112,7 @@ public class InputActions : MonoBehaviour
         CircleCollider2D collider = laserIns.GetComponent<CircleCollider2D>();
         laserIns.gameObject.layer = LayerMask.NameToLayer("Laser");
 
-        laserRb.AddForce(pos * 500);
+        laserRb.AddForce(pos * 1250);
     }
 
     // collection of books
