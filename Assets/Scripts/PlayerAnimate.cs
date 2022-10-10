@@ -10,6 +10,11 @@ public class PlayerAnimate : MonoBehaviour
     private float animTime = 0f;
     private Vector2 moveDirectionAnim;
 
+    void Start()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     private void AnimatePlayerDirection(int playerDirectionOffset)
     {
         if (moveDirectionAnim.x == 0 && moveDirectionAnim.y == 0)
@@ -61,7 +66,7 @@ public class PlayerAnimate : MonoBehaviour
     {
         int animDirectionSelect = 0;
         float animDelay = 0f;
-        animDelay += Time.fixedDeltaTime;
+        animDelay += Time.deltaTime;
 
         //D
         if ((-0.25f <= moveDirectionAnim.x) && (0.25f >= moveDirectionAnim.x) && (-0.75f >= moveDirectionAnim.y) && (-1f <= moveDirectionAnim.y))
