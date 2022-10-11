@@ -11,6 +11,7 @@ public class LevelSet : MonoBehaviour
     private GameObject[] books;
     public static Vector2 respawn;
     private float totalBooks;
+    public static float gameEndTime;
 
     [SerializeField] private GameObject Holding;
     private TextMesh hold;
@@ -46,11 +47,16 @@ public class LevelSet : MonoBehaviour
         }
         if(totalBooks == 15 && level == -1)
         {
-            level = 3;
+            gameEndTime = Timer.timeRemaining;
+            Timer.timerIsRunning = false; 
             InputActions.redBooks = 0;
             InputActions.blueBooks = 0;
             InputActions.greenBooks = 0;
             totalBooks = 0;
+
+            SceneManager.LoadScene("winScreen");
+            Timer.timeRemaining = 480;
+            level = 1;
         }
     }
 
@@ -63,6 +69,7 @@ public class LevelSet : MonoBehaviour
         switch (level)
         {
             case 1:
+                Timer.timerIsRunning = true; 
                 respawn = new Vector2(0, -2);
                 player.transform.position = respawn;
                 InputActions.canShoot = false;
@@ -136,7 +143,6 @@ public class LevelSet : MonoBehaviour
                 break;
             case 3:
 
-                SceneManager.LoadScene("winScreen");
                 break;
         }
     }
